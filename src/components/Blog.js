@@ -5,8 +5,8 @@ function Blog() {
         <div className="blogPreviewContainer">
             <img src="https://picsum.photos/200"/>
             <div>
-            <h2>feds</h2>
-            <p>dfnsi niseg iig ig nbig bigr</p>
+            <h2>Hi</h2>
+            <p>temp test blog</p>
             </div>
         </div>
      );

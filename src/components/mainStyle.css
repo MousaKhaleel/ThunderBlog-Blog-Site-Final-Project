@@ -1,7 +1,8 @@
 .footer-dark {
-    padding:50px 0;
-    color:#f0f9ff;
-    background-color:#282d32;
+    padding:40px 0;
+    color:rgb(240, 249, 255);
+    background-color:rgb(40, 45, 50);
+    margin-top: 22px;
   }
   
   .footer-dark h3 {
@@ -72,7 +73,7 @@
     border-radius:50%;
     box-shadow:0 0 0 1px rgba(255,255,255,0.4);
     margin:0 8px;
-    color:#fff;
+    color:white;
     opacity:0.75;
   }
   
@@ -88,6 +89,27 @@
     margin-bottom:0;
   }
 
+/* //////////////////////////////////////// */
+  
 .blogPreviewContainer{
   display: flex;
+  background: rgb(247,247,247);
+  margin-block: 10px;
+  border-radius: 4px;
+}
+
+.blogPreviewContainer img{
+  border-radius: 4px;
+}
+
+/* /////////////////// */
+
+.container{
+  height: 100vh;
+}
+.teamContainer{
+  margin-top: 10%;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-around;
 }
