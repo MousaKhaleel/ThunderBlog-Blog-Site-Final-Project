@@ -6,7 +6,7 @@ function Blog(blog) {
       <img src="https://picsum.photos/200" />
       <div>
         <h2>{blog.Title}</h2>
-        {/* <p>{blog.Content}</p> */}
+        <p>Click to read more</p>
       </div>
     </div>
   );

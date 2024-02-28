@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Blog from "./Blog";
 
-function BlogList() {
-  const [blogs, setBlogs] = useState([]);
+function BlogList({blogs}) {
 
-  useEffect(() => {
-    fetch("http://localhost:8000/allblogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data))
-      .catch((error) => console.error(error));
-  }, []);
+  console.log(blogs)
 
-  useEffect(() => {
-    console.log(blogs);
-  }, [blogs]);
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/allblogs")
+  //     .then((res) => res.json())
+  //     .then((data) => setBlogs(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
+  
 
+  
   return (
-    <div>
-      {blogs && blogs.map((blog) => (
-        <Blog key={blog._id} blog={blog.Title} />
-      ))}
-    </div>
+<div>
+  {blogs.map((item, i) => (
+    <Blog key={i} Title={item.Title} />
+  ))}
+</div>
   );
 }
 

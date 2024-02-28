@@ -26,7 +26,8 @@ function Footer() {
                         </ul>
                     </div>
                     <div className="col-md-6 item text">
-                        <img src={Logo2} width={'200px'}/>
+                    <a href="/" >
+                        <img src={Logo2} width={'200px'}/></a>
                         <p>Write like never before.</p>
                     </div>
                     <div className="col item social"><a href="#"><FaLinkedinIn /></a><a href="#"><FaGithub /></a><a href="#"><FaLinkedinIn /></a><a href="#"><FaGithub /></a></div>
