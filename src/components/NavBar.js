@@ -23,7 +23,7 @@ function NavBar() {
           <a className="nav-link" href="#">All Blogs</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Write a blog</a>
+          <a className="nav-link" href="/WriteBlog">Write a blog</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/AboutUs">About us</a>

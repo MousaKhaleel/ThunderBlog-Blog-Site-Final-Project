@@ -5,15 +5,16 @@ function LogIn() {
   return (
     <div className='wContainer'>
     <div className="container-md mx-auto w-100 p-5 mt-5 rounded" style={{ background: 'rgb(247,247,247)' }}>
-    <h1>LogIn</h1>
+    <h1>Log In</h1>
+    <br/>
       <form action="http://localhost:8000/login" method="post">
         <div className="form-group">
           <label htmlFor="email">Name</label>
           <input name="name" type="text" className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your name" />
-
+          <br/>
           <label htmlFor="email">Email</label>
           <input name="email" type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
-
+      <br/>
           <label htmlFor="password">Password</label>
           <input name="password" type="password" className="form-control" id="password" placeholder="Password" />
         </div>

@@ -13,18 +13,22 @@ import AboutUs from './components/AboutUs';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
+import WriteBlog from './components/WriteBlog';
 // rgb(28, 28, 132) secondry color
+
 function App() {
 
-  useEffect( ()=> {
-    fetch('http://localhost:8000/allblogs')
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error))
-},[])
-    // return(JSON.stringify(data))
+
 
   const [user,setUser]=useState();
+
+  async function login(user) {
+    setUser(user);
+  }
+
+  // async function login(user) {
+  //   setUser(user);
+  // }
 
   return (
     <div className="App">
@@ -32,6 +36,9 @@ function App() {
     <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />} />
+            </Routes>
+            <Routes>
+                <Route path="/WriteBlog" element={<WriteBlog />} />
             </Routes>
             <Routes>
                 <Route path="/LogIn" element={<LogIn />} />

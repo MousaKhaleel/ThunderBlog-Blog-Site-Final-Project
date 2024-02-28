@@ -27,12 +27,11 @@ app.get('/',function(req,res)
 app.post('/login',urlEncoded,async(req,res)=>{
     const findAuthor= await userCollection.findOne({'Name':req.body.name,'Email':req.body.email,'Password':req.body.password})
     if(findAuthor){
-
+        res.send('welcome')
     }
-    else{
-        res.redirect('/register')
+    else{   
+        res.redirect('/Register')
     }
-    res.send('done')
 })
 
 
