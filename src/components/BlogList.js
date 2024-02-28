@@ -5,7 +5,7 @@ function BlogList() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/allBlogs")
+    fetch("http://localhost:8000/allblogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error(error));
