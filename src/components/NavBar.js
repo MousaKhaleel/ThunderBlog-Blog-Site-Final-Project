@@ -3,6 +3,7 @@ import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
 import Popper from 'popper.js'; 
 
+
 function NavBar() {
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(0, 0, 66)'}}>
@@ -22,9 +23,12 @@ function NavBar() {
           <a className="nav-link" href="#">All Blogs</a>
         </li>
         <li className="nav-item">
+          <a className="nav-link" href="#">Write a blog</a>
+        </li>
+        <li className="nav-item">
           <a className="nav-link" href="/AboutUs">About us</a>
         </li>
-        <li className="nav-item dropdown">
+        <li className="nav-item dropdown user">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             User Account
           </a>

@@ -121,3 +121,9 @@
   margin-bottom: 4%;
 }
 }
+
+@media (min-width:1000px) {
+.user{
+  margin-left:800px
+}
+}
