@@ -1,25 +1,49 @@
 import './mainStyle.css'
+import { useState } from 'react';
 
 function WriteBlog() {
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  function handleTitleChange(e) {
+    setTitle(e.target.value);
+  }
+
+  function handleContentChange(e) {
+    setContent(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newBlogObject = {
+      Title: title,
+      Content: content,
+      AuthorID:"temp",//change
+      id: Date.now().toString(),
+    };
+  }
     return ( 
         <div className="writeContainer">
-            <form>
+            <form onSubmit={handleSubmit} >
             <h1>Write a blog</h1>
   <div className="form-group">
-    <label htmlFor="exampleFormControlInput1">Title</label>
+    <label htmlFor="title">Title</label>
     <input
-      type="email"
+      type="text"
       className="form-control"
-      id="exampleFormControlInput1"
+      id="title"
+      value={title} onChange={handleTitleChange}
       placeholder="Be creative"
     />
   </div>
   <div className="form-group">
   <br/>
-    <label htmlFor="exampleFormControlTextarea1">Content</label>
+    <label htmlFor="content">Content</label>
     <textarea
       className="form-control"
-      id="exampleFormControlTextarea1"
+      id="content"
+      value={content} onChange={handleContentChange}
       rows={14}
       defaultValue={""}
     />
