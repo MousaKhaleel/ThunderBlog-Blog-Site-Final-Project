@@ -36,6 +36,7 @@ app.post('/login',async(req,res)=>{
         // jwt.sign({name,id:findAuthor._id},{},(e,token)=>{
             // res.cookie('token',token).json('ok')
             res.cookie('name',name).json('ok')
+            res.cookie('id',findAuthor._id).json('ok')
         // });
     }
     else{
@@ -58,6 +59,18 @@ app.post('/register',async(req,res)=>{
         }
     } catch (error) {
         console.error('Error registering user:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/addblog',async(req,res)=>{
+
+    try {
+        const { title, content, id } = req.body;
+            await userCollection.insertOne({ 'Title': title, 'Content': content, 'AuthorID': id });
+            res.send('add successfully');
+    } catch (error) {
+        console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
 });
