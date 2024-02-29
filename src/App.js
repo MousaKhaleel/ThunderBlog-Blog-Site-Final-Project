@@ -38,16 +38,16 @@ function App() {
                 <Route path="/" element={<HomePage />} />
             </Routes>
             <Routes>
-                <Route path="/WriteBlog" element={<WriteBlog />} />
+                <Route path="/writeblog" element={<WriteBlog />} />
             </Routes>
             <Routes>
-                <Route path="/LogIn" element={<LogIn />} />
+                <Route path="/login" element={<LogIn />} />
             </Routes>
             <Routes>
-                <Route path="/Register" element={<Register />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
             <Routes>
-                <Route path="/AboutUs" element={<AboutUs />} />
+                <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
         </BrowserRouter>
         <Footer />
