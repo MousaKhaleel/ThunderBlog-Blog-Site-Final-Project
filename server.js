@@ -11,14 +11,17 @@ const blogCollection= myDb.collection('Blogs')
 const express= require('express');
 var app=express();
 const cors = require("cors");
-const path = require('path');
-app.use(cors());
-// app.use(express.json())//used body parser
+// const path = require('path');
+const jwt=require('jsonwebtoken')
+const cp=require('cookie-parser')
+app.use(cors({credentials:true,origin:'http://localhost:3000'}));
+app.use(express.json())//instade of body parser
+app.use(cp())
 
 
-var bodyParse= require('body-parser')
+// var bodyParse= require('body-parser')
 
-var urlEncoded= bodyParse.urlencoded({extended:false})
+// var urlEncoded= bodyParse.urlencoded({extended:false})
 
 app.get('/',function(req,res)
 {
@@ -26,23 +29,21 @@ app.get('/',function(req,res)
 });
 
 
-app.post('/login',urlEncoded,async(req,res)=>{
-    const findAuthor= await userCollection.findOne({'Name':req.body.name,'Email':req.body.email,'Password':req.body.password})
+app.post('/login',async(req,res)=>{
+    const { name, email, password } = req.body;
+    const findAuthor= await userCollection.findOne({'Name':name,'Email':email,'Password':password})
     if(findAuthor){
-        res.send('welcome')
+        jwt.sign({name,id:findAuthor._id},{},(e,token)=>{
+            res.cookie('token',token).json('ok')
+        });
     }
-    else{   
-        const registerFilePath = path.join(__dirname, '/src/components/Register.js');
-        res.sendFile(registerFilePath);
-
-       // res.sendFile(path.join(__dirname, '/path/to/Register.js'));
-
-      // res.redirect('http://localhost:8000/register');
+    else{
+        res.status(400).json('wrong');
     }
 })
 
 
-app.post('/register',urlEncoded,async(req,res)=>{
+app.post('/register',async(req,res)=>{
 
     try {
         const { name, email, password } = req.body;
