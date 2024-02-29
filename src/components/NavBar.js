@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import Logo from '../assets/9HDL7w-LogoMakr.png'
 import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
@@ -6,11 +6,27 @@ import Popper from 'popper.js';
 
 
 function NavBar() {
+  const [name,setName]=useState(null)
   useEffect(()=>{
     fetch('http://localhost:8000/profile',{
-      credentials:'include'
-    })
+      credentials:'include',
+      method:'GET'
+    }).then(res=>{
+      res.json().then(info=>{
+        setName(info.name)
+      })
+    },[])
+    console.log(name)
   })
+
+  function handleLogout() {
+    fetch('http://localhost:3000/logout',{
+      credentials:'include',
+      method:'POST'
+    })
+    setName(null)
+  }
+
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(0, 0, 66)'}}>
   <div className="container-fluid">
@@ -25,8 +41,9 @@ function NavBar() {
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">My Blogs</a>
+        {name && <>
+          <li className="nav-item">
+          <a className="nav-link" href="/myblogs">My Blogs</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/writeblog">Write a blog</a>
@@ -36,14 +53,34 @@ function NavBar() {
         </li>
         <li className="nav-item dropdown user">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            User Account
+            Welcome {name}
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a className="dropdown-item" href="/login">Account</a></li>
             <li><a className="dropdown-item" href="#">history</a></li>
-            <li><a className="dropdown-item" href="#">Log out</a></li>
+            <li><a className="dropdown-item" onClick={handleLogout} href="#">Log out</a></li>
           </ul>
         </li>
+        </>}
+        {!name && <>
+        <li className="nav-item">
+          <a className="nav-link" href="/login">My Blogs</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/login">Write a blog</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/aboutus">About us</a>
+        </li>
+        <li className="nav-item dropdown user">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Log In
+          </a>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a className="dropdown-item" href="/login">LogIn</a></li>
+          </ul>
+        </li>
+        </>}
       </ul>
     </div>
   </div>

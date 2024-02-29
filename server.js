@@ -61,6 +61,17 @@ app.post('/register',async(req,res)=>{
     }
 });
 
+app.get('/profile',(req,res)=>{
+    const {token}=req.cookies
+    jwt.verify(token,{},(e,info)=>{
+        res.json(info)
+    })
+})
+
+.post('/logout',function(req,res){
+    res.cookie('token','').json('ok')
+})
+
 
 app.get('/allblogs',async(req,res)=>{
     const allBlogs= await blogCollection.find({}).toArray()
