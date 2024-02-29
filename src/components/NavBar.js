@@ -13,7 +13,7 @@ function NavBar() {
       method:'GET'
     }).then(res=>{
       res.json().then(info=>{
-        setName(info.name)
+        setName(JSON.stringify(info))
       })
     },[])
     console.log(name)

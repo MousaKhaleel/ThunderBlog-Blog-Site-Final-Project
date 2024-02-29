@@ -12,7 +12,7 @@ const express= require('express');
 var app=express();
 const cors = require("cors");
 // const path = require('path');
-const jwt=require('jsonwebtoken')
+// const jwt=require('jsonwebtoken')
 const cp=require('cookie-parser')
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json())//instade of body parser
@@ -33,9 +33,10 @@ app.post('/login',async(req,res)=>{
     const { name, email, password } = req.body;
     const findAuthor= await userCollection.findOne({'Name':name,'Email':email,'Password':password})
     if(findAuthor){
-        jwt.sign({name,id:findAuthor._id},{},(e,token)=>{
-            res.cookie('token',token).json('ok')
-        });
+        // jwt.sign({name,id:findAuthor._id},{},(e,token)=>{
+            // res.cookie('token',token).json('ok')
+            res.cookie('name',name).json('ok')
+        // });
     }
     else{
         res.status(400).json('wrong');
@@ -62,14 +63,16 @@ app.post('/register',async(req,res)=>{
 });
 
 app.get('/profile',(req,res)=>{
-    const {token}=req.cookies
-    jwt.verify(token,{},(e,info)=>{
+    // const {token}=req.cookies
+    const info=req.cookies
+    // jwt.verify(token,{},(e,info)=>{
         res.json(info)
-    })
+    // })
 })
 
 .post('/logout',function(req,res){
-    res.cookie('token','').json('ok')
+    // res.cookie('token','').json('ok')
+    res.cookie('name',null).json('ok')
 })
 
 
