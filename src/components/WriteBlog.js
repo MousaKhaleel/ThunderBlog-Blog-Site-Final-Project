@@ -5,7 +5,7 @@ function WriteBlog() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-
+  const [authorId , setAuthorId] = useState('');
   function handleTitleChange(e) {
     setTitle(e.target.value);
   }
@@ -19,7 +19,7 @@ function WriteBlog() {
     const newBlogObject = {
       Title: title,
       Content: content,
-      AuthorID:"temp",//change
+      AuthorID: authorId,//change
       id: Date.now().toString(),
     };
   }
