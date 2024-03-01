@@ -15,8 +15,6 @@ async function handleRegister(e) {
     body: JSON.stringify({name, email, password}),
     headers:{'Content-Type':'application/json'}
   })
-  if(res!==200)
-  alert('error try again')
 }
 else{
   alert('confirm password')
