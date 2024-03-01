@@ -1,7 +1,9 @@
 import './mainStyle.css';
+import './blogStyle.css'
 
 function Blog(blog) {
   return (
+    <a href='/blogcontent'>
     <div className="blogPreviewContainer">
       <img src="https://picsum.photos/200" />
       <div>
@@ -9,6 +11,7 @@ function Blog(blog) {
         <p>Click to read more</p>
       </div>
     </div>
+    </a>
   );
 }
 

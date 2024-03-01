@@ -4,15 +4,6 @@ import Blog from "./Blog";
 function BlogList({blogs}) {
 
   console.log(blogs)
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/allblogs")
-  //     .then((res) => res.json())
-  //     .then((data) => setBlogs(data))
-  //     .catch((error) => console.error(error));
-  // }, []);
-  
-
   
   return (
 <div>

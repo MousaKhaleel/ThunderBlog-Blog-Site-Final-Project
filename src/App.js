@@ -14,17 +14,17 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
 import WriteBlog from './components/WriteBlog';
-// rgb(28, 28, 132) secondry color
+import BlogContent from './components/BlogContent';
 
 function App() {
 
 
 
-  const [user,setUser]=useState();
+  // const [user,setUser]=useState();
 
-  async function login(user) {
-    setUser(user);
-  }
+  // async function login(user) {
+  //   setUser(user);
+  // }
 
   // async function login(user) {
   //   setUser(user);
@@ -48,6 +48,9 @@ function App() {
             </Routes>
             <Routes>
                 <Route path="/aboutus" element={<AboutUs />} />
+            </Routes>
+            <Routes>
+                <Route path="/blogcontent" element={<BlogContent />} />
             </Routes>
         </BrowserRouter>
         <Footer />

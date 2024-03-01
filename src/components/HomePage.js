@@ -7,13 +7,6 @@ function HomePage() {
     const[blogs,setBlogs]=useState(null);
     const[loading,setLoading]=useState(true);
     
-    // useEffect( ()=> {
-    //     fetch('http://localhost:8000/allblogs')
-    //       .then(res => res.json())
-    //       .then(data => setBlogs(data))
-    //       .catch(error => console.error(error))
-    // },[])
-    // console.log(blogs)
 
     useEffect(() => {
         fetch("http://localhost:8000/allblogs")
