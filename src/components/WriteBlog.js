@@ -62,7 +62,7 @@ function WriteBlog() {
     />
   </div>
   <br/>
-        <button type="submit" className="btn w-100" style={{ background: 'rgb(255, 150, 0)', color:'white' }} >Publish</button>
+        <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Publish</button>
 </form>
         </div>
      );
