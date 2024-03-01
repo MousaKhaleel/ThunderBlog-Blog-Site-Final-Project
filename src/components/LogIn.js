@@ -10,23 +10,73 @@ function LogIn() {
   const [loading, setLoading]=useState(false);
   const [redirect, setRedirect]=useState(false);
 
+  // async function handleLogin(e) {
+  //   e.preventDefault();
+  //   setLoading(true)
+  //   const res=await fetch('http://localhost:8000/login',{
+  //     method:'POST',
+  //     body: JSON.stringify({name, email, password}),
+  //     headers:{'Content-Type':'application/json'},
+  //     credentials:'include',
+  //   })
+  //   if(res.ok){
+  //     setLoading(false)
+  //     setRedirect(true)
+  // }
+  //   else
+  //   alert('wrong password or email')
+  // }
+  // async function handleLogin(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   try {
+  //     const res = await fetch('http://localhost:8000/login', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ name, email, password }),
+  //       headers: { 'Content-Type': 'application/json' },
+  //       credentials: 'include',
+  //     });
+  
+  //     if (res.ok) {
+  //       setLoading(false);
+  //       setRedirect(true);
+  //     } else {
+  //       const errorMessage = await res.text(); // Get error message from response body
+  //       throw new Error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     setLoading(false);
+  //     alert('Failed to login: ' + error.message); // Display error message
+  //   }
+  // }
   async function handleLogin(e) {
     e.preventDefault();
-    setLoading(true)
-    const res=await fetch('http://localhost:8000/login',{
-      method:'POST',
-      body: JSON.stringify({name, email, password}),
-      headers:{'Content-Type':'application/json'},
-      credentials:'include',
-    })
-    if(res.ok){
-      setLoading(false)
-      setRedirect(true)
+    setLoading(true);
+  
+    try {
+      const res = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+  
+      if (res.ok) {
+        const data = await res.json();
+        setLoading(false);
+        setRedirect(true);
+        // Store the token in localStorage or sessionStorage for subsequent requests
+        localStorage.setItem('token', data.token); // You can use sessionStorage if you want the token to be cleared when the browser is closed
+      } else {
+        const errorMessage = await res.text();
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      setLoading(false);
+      alert('Failed to login: ' + error.message);
+    }
   }
-    else
-    alert('wrong password or email')
-  }
-
   if(redirect){
         return <Navigate to={'/'} />
   }
