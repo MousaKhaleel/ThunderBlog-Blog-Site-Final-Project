@@ -10,46 +10,6 @@ function LogIn() {
   const [loading, setLoading]=useState(false);
   const [redirect, setRedirect]=useState(false);
 
-  // async function handleLogin(e) {
-  //   e.preventDefault();
-  //   setLoading(true)
-  //   const res=await fetch('http://localhost:8000/login',{
-  //     method:'POST',
-  //     body: JSON.stringify({name, email, password}),
-  //     headers:{'Content-Type':'application/json'},
-  //     credentials:'include',
-  //   })
-  //   if(res.ok){
-  //     setLoading(false)
-  //     setRedirect(true)
-  // }
-  //   else
-  //   alert('wrong password or email')
-  // }
-  // async function handleLogin(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-  
-  //   try {
-  //     const res = await fetch('http://localhost:8000/login', {
-  //       method: 'POST',
-  //       body: JSON.stringify({ name, email, password }),
-  //       headers: { 'Content-Type': 'application/json' },
-  //       credentials: 'include',
-  //     });
-  
-  //     if (res.ok) {
-  //       setLoading(false);
-  //       setRedirect(true);
-  //     } else {
-  //       const errorMessage = await res.text(); // Get error message from response body
-  //       throw new Error(errorMessage);
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     alert('Failed to login: ' + error.message); // Display error message
-  //   }
-  // }
   async function handleLogin(e) {
     e.preventDefault();
     setLoading(true);
@@ -66,8 +26,7 @@ function LogIn() {
         const data = await res.json();
         setLoading(false);
         setRedirect(true);
-        // Store the token in localStorage or sessionStorage for subsequent requests
-        localStorage.setItem('token', data.token); // You can use sessionStorage if you want the token to be cleared when the browser is closed
+        localStorage.setItem('token', data.token);
       } else {
         const errorMessage = await res.text();
         throw new Error(errorMessage);
@@ -99,7 +58,7 @@ function LogIn() {
         <br />
         <p><small>Don't have an account yet?<a href='/register'> Let's start Blogging!</a></small></p>
         <br/>
-        <button type="submit" className="btn w-100" style={{ background: 'rgb(255, 150, 0)', color:'white' }} >LogIn</button>
+        <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >LogIn</button>
         {loading&&<p>loading...</p>}
       </form>
     </div>

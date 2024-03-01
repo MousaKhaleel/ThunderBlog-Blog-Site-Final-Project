@@ -1,5 +1,5 @@
 import { useEffect, useState  } from 'react';
-import Logo from '../assets/9HDL7w-LogoMakr.png'
+import Logo from '../assets/3XHUPg-LogoMakr.png'
 import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
 import Popper from 'popper.js'; 
@@ -37,7 +37,7 @@ function NavBar() {
     }
 
     return ( 
-        <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(0, 0, 66)'}}>
+        <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(11, 36, 71)'}}>
   <div className="container-fluid">
   <a className="navbar-brand" href="/">
       <img src={Logo} alt="ThunderBlog" width="40"/>ThunderBlog
@@ -81,13 +81,8 @@ function NavBar() {
         <li className="nav-item">
           <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
         </li>
-        <li className="nav-item dropdown user">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <IoMdLogIn /> Log In
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a className="dropdown-item" href="/login"><IoMdLogIn /> LogIn</a></li>
-          </ul>
+        <li className="nav-item">
+          <a className="nav-link" href="/login"><IoMdLogIn /> Login</a>
         </li>
         </>}
       </ul>

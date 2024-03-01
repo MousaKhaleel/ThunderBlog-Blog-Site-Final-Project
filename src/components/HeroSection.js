@@ -28,7 +28,7 @@ function HeroSection() {
       </div>
     </div>
     <div className="lc-block">
-      <a className="btn" href="#" role="button" style={{background: 'rgb(255, 150, 0)', color:'white'}}>
+      <a className="btn" href="#" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
       </a>
     </div>

@@ -1,6 +1,6 @@
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import Logo2 from '../assets/1GTNqX-LogoMakr.png';
+import Logo2 from '../assets/4X9uRk-LogoMakr.png';
 import './mainStyle.css'
 
 function Footer() {

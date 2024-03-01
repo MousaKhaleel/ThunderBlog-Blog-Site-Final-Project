@@ -43,7 +43,7 @@ else{
           <br />
         <p><small>Already have an account?<a href='/login'> Let's LogIn</a></small></p>
         <br/>
-          <button type="submit" className="btn w-100" style={{ background: 'rgb(255, 150, 0)', color:'white' }} >Register</button>
+          <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Register</button>
         </form>
       </div>
       </div>
