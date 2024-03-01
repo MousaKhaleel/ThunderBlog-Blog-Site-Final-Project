@@ -67,7 +67,7 @@ function NavBar() {
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a className="dropdown-item" href="/login"><MdAccountCircle /> Account</a></li>
             <li><a className="dropdown-item" href="#"><FaHistory /> History</a></li>
-            <li><a className="dropdown-item" onClick={handleLogout} href="#"><IoIosLogOut /> Log out</a></li>
+            <li><a className="dropdown-item" onClick={handleLogout} href="/"><IoIosLogOut /> Log out</a></li>
           </ul>
         </li>
         </>}
