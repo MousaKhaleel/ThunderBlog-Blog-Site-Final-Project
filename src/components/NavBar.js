@@ -1,4 +1,4 @@
-import { useEffect,useState  } from 'react';
+import { useEffect, useState  } from 'react';
 import Logo from '../assets/9HDL7w-LogoMakr.png'
 import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
@@ -10,6 +10,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
 import { MdAccountBox } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
+import { IoMdLogIn } from "react-icons/io";
 
 
 function NavBar() {
@@ -26,7 +27,6 @@ function NavBar() {
     },[])
     console.log(name)
     })
-  }
 
     function handleLogout() {
       fetch('http://localhost:3000/logout',{
@@ -34,6 +34,7 @@ function NavBar() {
         method:'POST'
       })
       setName(null)
+    }
 
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(0, 0, 66)'}}>
@@ -51,41 +52,41 @@ function NavBar() {
         </li>
         {name && <>
           <li className="nav-item">
-          <a className="nav-link" href="/myblogs">My Blogs</a>
+          <a className="nav-link" href="/myblogs"><FaCloud /> My Blogs</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/writeblog">Write a blog</a>
+          <a className="nav-link" href="/writeblog"><FaCloud /> Write a blog</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/aboutus">About us</a>
+          <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
         </li>
         <li className="nav-item dropdown user">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Welcome {name}
+          <MdAccountBox /> Welcome {name}
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a className="dropdown-item" href="/login">Account</a></li>
-            <li><a className="dropdown-item" href="#">history</a></li>
-            <li><a className="dropdown-item" onClick={handleLogout} href="#">Log out</a></li>
+            <li><a className="dropdown-item" href="/login"><MdAccountCircle /> Account</a></li>
+            <li><a className="dropdown-item" href="#"><FaHistory /> History</a></li>
+            <li><a className="dropdown-item" onClick={handleLogout} href="#"><IoIosLogOut /> Log out</a></li>
           </ul>
         </li>
         </>}
         {!name && <>
         <li className="nav-item">
-          <a className="nav-link" href="/login">My Blogs</a>
+          <a className="nav-link" href="/login"><FaCloud /> My Blogs</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/login">Write a blog</a>
+          <a className="nav-link" href="/login"><FaCloud /> Write a blog</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/aboutus">About us</a>
+          <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
         </li>
         <li className="nav-item dropdown user">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Log In
+          <IoMdLogIn /> Log In
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a className="dropdown-item" href="/login">LogIn</a></li>
+            <li><a className="dropdown-item" href="/login"><IoMdLogIn /> LogIn</a></li>
           </ul>
         </li>
         </>}
