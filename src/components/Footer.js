@@ -20,8 +20,8 @@ function Footer() {
                     <div className="col-sm-6 col-md-3 item">
                         <h3>About</h3>
                         <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
+                            <li><a href="/aboutus">Company</a></li>
+                            <li><a href="/aboutus">Team</a></li>
                             <li><a href="#">Careers</a></li>
                         </ul>
                     </div>

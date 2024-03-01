@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState  } from 'react';
 import Logo from '../assets/9HDL7w-LogoMakr.png'
 import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
@@ -13,11 +13,27 @@ import { IoIosLogOut } from "react-icons/io";
 
 
 function NavBar() {
+  const [name,setName]=useState(null)
+
   useEffect(()=>{
     fetch('http://localhost:8000/profile',{
-      credentials:'include'
+      credentials:'include',
+      method:'GET'
+    }).then(res=>{
+      res.json().then(info=>{
+        setName(info.name)
+      })
+    },[])
+    console.log(name)
     })
-  })
+
+    function handleLogout() {
+      fetch('http://localhost:3000/logout',{
+        credentials:'include',
+        method:'POST'
+      })
+      setName(null)
+
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark" style={{background:'rgb(0, 0, 66)'}}>
   <div className="container-fluid">
@@ -43,7 +59,7 @@ function NavBar() {
         </li>
         <li className="nav-item dropdown user">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <MdAccountBox /> User Account
+          <MdAccountBox /> Welcome {name}
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a className="dropdown-item" href="/login"><MdAccountCircle /> Account</a></li>
