@@ -1,11 +1,14 @@
 import './mainStyle.css'
 import { useState,useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 function WriteBlog() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [id,setId]=useState(null)
+  const [loading, setLoading]=useState(false);
+  const [redirect, setRedirect]=useState(false);
 
   useEffect(()=>{
     fetch('http://localhost:8000/profile',{
@@ -13,7 +16,7 @@ function WriteBlog() {
       method:'GET'
     }).then(res=>{
       res.json().then(info=>{
-        setId(JSON.stringify(info.id))
+        setId(info.id)
       })
     },[])
     console.log(id)
@@ -29,12 +32,21 @@ function WriteBlog() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
     const res=await fetch('http://localhost:8000/addblog',{
     method:'POST',
     body: JSON.stringify({title, content, id}),
     headers:{'Content-Type':'application/json'}
   })
+  if(res.ok){
+    setLoading(false)
+  setRedirect(true)
   }
+  }
+
+  if(redirect){
+    return <Navigate to={'/myblogs'} />
+}
 
     return ( 
         <div className="writeContainer">
@@ -63,6 +75,7 @@ function WriteBlog() {
   </div>
   <br/>
         <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Publish</button>
+        {loading && <p>loading...</p>}
 </form>
         </div>
      );
