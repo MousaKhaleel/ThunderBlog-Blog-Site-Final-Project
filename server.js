@@ -1,6 +1,6 @@
 const {MongoClient}=require('mongodb')
-var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-// var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
+// var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
 const client= new MongoClient(connection)
 
 const myDb= client.db('Blog-Website')
@@ -12,13 +12,13 @@ const express= require('express');
 var app=express();
 const cors = require("cors");
 // const path = require('path');
-// const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken')
 const cp=require('cookie-parser')
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json())//instade of body parser
 app.use(cp())
 
-
+const secret='bu43ry8477r8gbn4f3e834iu';
 // var bodyParse= require('body-parser')
 
 // var urlEncoded= bodyParse.urlencoded({extended:false})
@@ -29,20 +29,17 @@ app.get('/',function(req,res)
 });
 
 
-app.post('/login',async(req,res)=>{
+
+app.post('/login', async (req, res) => {
     const { name, email, password } = req.body;
-    const findAuthor= await userCollection.findOne({'Name':name,'Email':email,'Password':password})
-    if(findAuthor){
-        // jwt.sign({name,id:findAuthor._id},{},(e,token)=>{
-            // res.cookie('token',token).json('ok')
-            res.cookie('name',name).json('ok')
-            res.cookie('id',findAuthor._id).json('ok')
-        // });
+    const findAuthor = await userCollection.findOne({ 'Name': name, 'Email': email, 'Password': password });
+    if (findAuthor) {
+      const token = jwt.sign({ name, id: findAuthor._id }, secret);
+      res.cookie('token', token, { httpOnly: true }).json('ok');
+    } else {
+      res.status(400).json('wrong');
     }
-    else{
-        res.status(400).json('wrong');
-    }
-})
+  });
 
 
 app.post('/register',async(req,res)=>{
@@ -63,18 +60,25 @@ app.post('/register',async(req,res)=>{
     }
 });
 
-app.get('/profile',(req,res)=>{
-    // const {token}=req.cookies
-    const info=req.cookies
-    // jwt.verify(token,{},(e,info)=>{
-        res.json(info)
-    // })
-})
-
-.post('/logout',function(req,res){
-    // res.cookie('token','').json('ok')
-    res.cookie('name',null).json('ok')
-})
+app.get('/profile', (req, res) => {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+  
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+  
+      res.json(decoded);
+    });
+  });
+  
+  app.post('/logout', function (req, res) {
+    res.clearCookie('token').json('ok');
+  });
+  
 
 
 app.post('/addblog',async(req,res)=>{
