@@ -29,7 +29,7 @@ function NavBar() {
     })
 
     function handleLogout() {
-      fetch('http://localhost:3000/logout',{
+      fetch('http://localhost:8000/logout',{
         credentials:'include',
         method:'POST'
       })
