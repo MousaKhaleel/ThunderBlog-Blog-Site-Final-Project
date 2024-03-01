@@ -1,11 +1,24 @@
 import './mainStyle.css'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 function WriteBlog() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [authorId , setAuthorId] = useState('');
+  const [id,setId]=useState(null)
+
+  useEffect(()=>{
+    fetch('http://localhost:8000/profile',{
+      credentials:'include',
+      method:'GET'
+    }).then(res=>{
+      res.json().then(info=>{
+        setId(JSON.stringify(info.id))
+      })
+    },[])
+    console.log(id)
+  })
+
   function handleTitleChange(e) {
     setTitle(e.target.value);
   }
@@ -14,15 +27,15 @@ function WriteBlog() {
     setContent(e.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const newBlogObject = {
-      Title: title,
-      Content: content,
-      AuthorID: authorId,//change
-      id: Date.now().toString(),
-    };
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const res=await fetch('http://localhost:8000/addblog',{
+    method:'POST',
+    body: JSON.stringify({title, content, id}),
+    headers:{'Content-Type':'application/json'}
+  })
   }
+
     return ( 
         <div className="writeContainer">
             <form onSubmit={handleSubmit} >
