@@ -1,5 +1,5 @@
 import './mainStyle.css'
-import backgroundImage from '../assets/pexels-jess-bailey-designs-768474.jpg';
+import backgroundImage from '../assets/pexels-picography-4458.jpg';
 
 function HeroSection() {
     return ( 
