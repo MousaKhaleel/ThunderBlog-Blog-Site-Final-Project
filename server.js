@@ -63,18 +63,6 @@ app.post('/register',async(req,res)=>{
     }
 });
 
-app.post('/addblog',async(req,res)=>{
-
-    try {
-        const { title, content, id } = req.body;
-            await userCollection.insertOne({ 'Title': title, 'Content': content, 'AuthorID': id });
-            res.send('add successfully');
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 app.get('/profile',(req,res)=>{
     // const {token}=req.cookies
     const info=req.cookies
@@ -86,19 +74,6 @@ app.get('/profile',(req,res)=>{
 .post('/logout',function(req,res){
     // res.cookie('token','').json('ok')
     res.cookie('name',null).json('ok')
-})
-
-
-app.get('/profile',(req,res)=>{
-    const {token}=req.cookies
-    jwt.verify(token,{},(e,info)=>{
-        res.json(info)
-    })
-})
-
-.post('/logout',function(req,res){
-    // res.cookie('token','').json('ok')
-    res.cookie('token','').json('ok')
 })
 
 
