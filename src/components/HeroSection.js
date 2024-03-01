@@ -11,6 +11,8 @@ function HeroSection() {
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+    borderEndEndRadius:'4px',
+    borderEndStartRadius:'4px'
   }}
 >
   <div
