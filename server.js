@@ -97,6 +97,7 @@ app.get('/profile',(req,res)=>{
 })
 
 .post('/logout',function(req,res){
+    // res.cookie('token','').json('ok')
     res.cookie('token','').json('ok')
 })
 
