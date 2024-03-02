@@ -11,6 +11,7 @@ import { FaHistory } from "react-icons/fa";
 import { MdAccountBox } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { IoMdLogIn } from "react-icons/io";
+import { TbWritingSign } from "react-icons/tb";
 
 
 function NavBar() {
@@ -59,7 +60,7 @@ function NavBar() {
               <a className="nav-link" href="/myblogs"><FaCloud /> My Blogs</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/writeblog"><FaCloud /> Write a blog</a>
+              <a className="nav-link" href="/writeblog"><TbWritingSign /> Write a blog</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
@@ -72,7 +73,7 @@ function NavBar() {
               <a className="nav-link" href="/login"><FaCloud /> My Blogs</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/login"><FaCloud /> Write a blog</a>
+              <a className="nav-link" href="/login"><TbWritingSign /> Write a blog</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
@@ -87,7 +88,7 @@ function NavBar() {
               <MdAccountBox /> {name}
             </a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a className="dropdown-item" href="/profiledetails"><MdAccountCircle /> Account</a></li>
+              <li><a className="dropdown-item" href="/profiledetails"><MdAccountCircle /> Profile</a></li>
               <li><a className="dropdown-item" href="/userhistory"><FaHistory /> History</a></li>
               <li><a className="dropdown-item" onClick={handleLogout} href="/"><IoIosLogOut /> Log out</a></li>
             </ul>
