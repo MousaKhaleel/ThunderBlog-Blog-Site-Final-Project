@@ -126,6 +126,12 @@ app.get('/userblogs/:id', async(req,res)=>{
   res.json(rus)
 })
 
+app.get('/historyblogs/:id', async(req,res)=>{
+  const id = new ObjectId(req.params.id);
+  rus=await blogCollection.findOne({'_id':id})
+  res.json(rus)
+})
+
 
 var server=app.listen(8000,function(){
     var host=server.address().address;

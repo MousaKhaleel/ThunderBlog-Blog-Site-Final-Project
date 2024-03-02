@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import BlogList from "./BlogList";
 
 function UserHistory() {
-    const [history,setHistory]=useState();
-    const [userId,setUserId]=useState(null)
+    const [history,setHistory]=useState([]);
+    const[historyBlogs,setHistoryBlogs]=useState([]);
+    const [id,setId]=useState(null)
     const [loading,setLoading]=useState(false)
 
     useEffect(()=>{
@@ -13,34 +15,58 @@ function UserHistory() {
           method:'GET'
         }).then(res=>{
           res.json().then(info=>{
-            setUserId(info.id)
+            setId(info.id)
           })
         },[])
       } catch (error) {
         console.log(error)
       }
-      })
+      },[])
 
-    useEffect(()=>{
-        try {
-          fetch('http://localhost:8000/history'+userId)
-          .then(res=>{
-            res.json().then(info=>{
-              setHistory(info)
-            })
-            setLoading(false)
-          },[])
-        } catch (error) {
-          console.log(error)
+      useEffect(() => {
+        if (id) {
+          fetch('http://localhost:8000/history/' + id, {
+            credentials: 'include'
+          })
+            .then(res => {
+              res.json().then(hist => {
+                setHistory(hist);
+              });
+            });
         }
-        },[userId])//userId
+        }, [id]);
 
-        console.log(history)
+        useEffect(() => {
+            const fetchHistoryBlogs = async () => {
+              const blogs = [];
+              for (let i = 0; i < history.length; i++) {
+                try {
+                  const res = await fetch(
+                    "http://localhost:8000/historyblogs/" + history[i],
+                    { credentials: "include" }
+                  );
+                  const blog = await res.json();
+                  blogs.push(blog);
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+              setHistoryBlogs(blogs.reverse());
+              setLoading(false)
+            };
+        
+            if (history.length > 0) {
+              setLoading(true);
+              fetchHistoryBlogs();
+            }
+          }, [history]);
 
     return ( 
         <div>
-        {loading && <h2>Loading...</h2>}
-            <p>{history}</p>
+        <main>
+          {loading && <h2 className="hl">Loading...</h2>}
+          <BlogList blogs={historyBlogs} />
+          </main>
         </div>
      );
 }
