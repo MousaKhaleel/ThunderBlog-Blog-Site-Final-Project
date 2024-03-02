@@ -63,3 +63,18 @@
     text-decoration: none;
     color: rgb(0, 166, 204);
   }
+  
+  /* //myblogs// */
+  .myBlogsContainer{
+    margin-block:2%;
+    min-height: 60vh;
+  }
+  .h{
+    text-align: center;
+    margin-top: 2%;
+  }
+  .hl{
+    min-height: 60vh;
+    text-align: center;
+    margin-top: 2%;
+  }
