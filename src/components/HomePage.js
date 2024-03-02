@@ -59,7 +59,7 @@ useEffect(() => {
             </> }
       <main>{name && <>
       {loading && <h2 className="hl">Loading...</h2>}
-      {blogs && <h1>Your Blogs, {name}.</h1>}
+      {blogs && <h1>Your Blogs, <a  href="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{name}</a>.</h1>}
       {blogs && <BlogList blogs={blogs} />}
       </>}
       </main>
