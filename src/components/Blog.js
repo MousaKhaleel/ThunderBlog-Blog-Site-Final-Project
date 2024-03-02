@@ -9,7 +9,7 @@ function Blog(blog) {
       {/* <img src="https://picsum.photos/200" /> */}
       <div>
         <h2>{blog.Title}</h2>
-        <p>Click to read more</p>
+        <p>Click to read the content.</p>
       </div>
     </div>
     </a>
