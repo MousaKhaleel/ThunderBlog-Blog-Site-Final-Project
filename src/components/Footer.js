@@ -11,11 +11,11 @@ function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col-sm-6 col-md-3 item">
-                        <h3>Services</h3>
+                        <h3>Help</h3>
                         <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
+                            <li><a href="#">Help center</a></li>
+                            <li><a href="#">Call us</a></li>
+                            <li><a href="#">How to blog</a></li>
                         </ul>
                     </div>
                     <div className="col-sm-6 col-md-3 item">

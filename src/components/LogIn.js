@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './mainStyle.css'
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -36,6 +36,15 @@ function LogIn() {
       alert('Failed to login: ' + error.message);
     }
   }
+
+  useEffect(() => {
+    if (redirect) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  }, [redirect]);
+
   if(redirect){
         return <Navigate to={'/'} />
   }
@@ -58,8 +67,8 @@ function LogIn() {
         <br />
         <p><small>Don't have an account yet?<a href='/register'> Let's start Blogging!</a></small></p>
         <br/>
-        <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >LogIn</button>
-        {loading&&<p>loading...</p>}
+        {!loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >LogIn</button>}
+        {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled >Loading...</button>}
       </form>
     </div>
     </div>

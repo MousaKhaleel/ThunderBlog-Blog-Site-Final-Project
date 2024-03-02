@@ -39,7 +39,7 @@ app.post('/login', async (req, res) => {
       const token = jwt.sign({ name, id: findAuthor._id }, secret);
       res.cookie('token', token, { httpOnly: true }).json('ok');
     } else {
-      res.status(400).json('wrong');
+      res.status(400).json('Wrong info try again');
     }
   });
 

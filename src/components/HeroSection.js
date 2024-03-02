@@ -1,7 +1,24 @@
 import './mainStyle.css'
 import backgroundImage from '../assets/pexels-picography-4458.jpg';
+import { useEffect, useState } from 'react';
 
 function HeroSection() {
+  const [name,setName]=useState(null)
+
+  useEffect(()=>{
+    try {
+      fetch('http://localhost:8000/profile',{
+        credentials:'include',
+        method:'GET'
+      }).then(res=>{
+        res.json().then(info=>{
+          setName(info.name)
+        })
+      },[])
+    } catch (error) {
+      console.log(error)
+    }
+    })
     return ( 
         <div
   lc-helper="background"
@@ -19,7 +36,7 @@ function HeroSection() {
     className="p-5 mb-4 lc-block col-7 col-8 col-11">
     <div className="lc-block">
       <div editable="rich">
-        <h2 className="fw-bolder display-3" style={{color:'white'}}>Welcome to ThunderBlog</h2>
+        <h2 className="fw-bolder display-3" style={{color:'white'}}>Welcome to <span style={{color:'rgb(0, 166, 204)'}}>ThunderBlog</span></h2>
       </div>
     </div>
     <div className="lc-block col-md-8">
@@ -29,11 +46,16 @@ function HeroSection() {
         </p>
       </div>
     </div>
-    <div className="lc-block">
-      <a className="btn" href="#" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
+    {!name && <div className="lc-block">
+      <a className="btn" href="/login" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
       </a>
-    </div>
+    </div>}
+    {name && <div className="lc-block">
+      <a className="btn" href="/writeblog" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
+        Let's start
+      </a>
+    </div>}
   </div>
 </div>
      );

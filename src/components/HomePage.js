@@ -19,7 +19,7 @@ function HomePage() {
         <div>
         <HeroSection />
         <main>
-        {loading && <h2>Loading...</h2>}
+        {loading && <h2 style={{textAlign:'center',height:'60vh'}}>Loading...</h2>}
         {blogs && <BlogList blogs={blogs}/>}
         </main>
         </div>

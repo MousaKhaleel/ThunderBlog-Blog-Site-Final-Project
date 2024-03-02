@@ -17,14 +17,18 @@ function NavBar() {
   const [name,setName]=useState(null)
 
   useEffect(()=>{
-    fetch('http://localhost:8000/profile',{
-      credentials:'include',
-      method:'GET'
-    }).then(res=>{
-      res.json().then(info=>{
-        setName(info.name)
-      })
-    },[])
+    try {
+      fetch('http://localhost:8000/profile',{
+        credentials:'include',
+        method:'GET'
+      }).then(res=>{
+        res.json().then(info=>{
+          setName(info.name)
+        })
+      },[])
+    } catch (error) {
+      console.log(error)
+    }
     })
 
     function handleLogout() {
@@ -79,8 +83,8 @@ function NavBar() {
       {name && (
         <ul className="navbar-nav">
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <MdAccountBox /> Welcome {name}
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}>
+              <MdAccountBox /> {name}
             </a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a className="dropdown-item" href="/profiledetails"><MdAccountCircle /> Account</a></li>
@@ -93,7 +97,7 @@ function NavBar() {
       {!name && (
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/login"><IoMdLogIn /> Login</a>
+            <a className="nav-link" href="/login" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}><IoMdLogIn /> Login</a>
           </li>
         </ul>
       )}

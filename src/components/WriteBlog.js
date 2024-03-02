@@ -74,8 +74,8 @@ function WriteBlog() {
     />
   </div>
   <br/>
-        <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Publish</button>
-        {loading && <p>loading...</p>}
+        {!loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Publish</button>}
+        {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Loading...</button>}
 </form>
         </div>
      );

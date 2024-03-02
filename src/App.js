@@ -16,20 +16,10 @@ import { useState, useEffect } from 'react';
 import WriteBlog from './components/WriteBlog';
 import BlogContent from './components/BlogContent';
 import MyBlogs from './components/MyBlogs';
+import UserHistory from './components/UserHistory';
+import ProfileDetails from './components/ProfileDetails';
 
 function App() {
-
-
-
-  // const [user,setUser]=useState();
-
-  // async function login(user) {
-  //   setUser(user);
-  // }
-
-  // async function login(user) {
-  //   setUser(user);
-  // }
 
   return (
     <div className="App">
@@ -54,13 +44,13 @@ function App() {
                 <Route path="/blogcontent/:id" element={<BlogContent />} />
             </Routes>
             <Routes>
-                <Route path="/profiledetails" element={<BlogContent />} />
+                <Route path="/profiledetails" element={<ProfileDetails />} />
             </Routes>
             <Routes>
                 <Route path="/myblogs" element={<MyBlogs />} />
             </Routes>
             <Routes>
-                <Route path="/userhistory" element={<BlogContent />} />
+                <Route path="/userhistory" element={<UserHistory />} />
             </Routes>
         </BrowserRouter>
         <Footer />

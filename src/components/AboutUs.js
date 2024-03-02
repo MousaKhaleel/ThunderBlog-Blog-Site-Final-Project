@@ -6,7 +6,7 @@ function AboutUs() {
         <div className="container">
         <div className="teamContainer">
             <div className="card" style={{ width: "18rem" }}>
-  <img className="card-img-top" src={coolerDefault} alt="Card image cap" />
+  <img className="card-img-top" src={coolerDefault} alt="MK" />
   <div className="card-body">
     <p className="card-text">
     CEO: Mousa Khaleel
@@ -14,7 +14,7 @@ function AboutUs() {
   </div>
 </div>
 <div className="card" style={{ width: "18rem" }}>
-  <img className="card-img-top" src={coolDefault} alt="Card image cap" />
+  <img className="card-img-top" src={coolDefault} alt="YF" />
   <div className="card-body">
     <p className="card-text">
     COO: Yazeed Fayoumi

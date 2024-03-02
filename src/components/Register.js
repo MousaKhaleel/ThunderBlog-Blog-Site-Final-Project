@@ -6,18 +6,22 @@ function Register() {
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
   const [confirmPassword, setConfirmPassword]=useState('');
+  const [loading, setLoading]=useState(false);
 
 async function handleRegister(e) {
     e.preventDefault()
+    setLoading(true)
     if(password===confirmPassword){
     const res=await fetch('http://localhost:8000/register',{
     method:'POST',
     body: JSON.stringify({name, email, password}),
     headers:{'Content-Type':'application/json'}
   })
+  setLoading(false)
 }
 else{
-  alert('confirm password')
+  alert('Password and confirm password do not match')
+  setLoading(false)
 }
 }
 
@@ -41,9 +45,10 @@ else{
             <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Password" />
           </div>
           <br />
-        <p><small>Already have an account?<a href='/login'> Let's LogIn</a></small></p>
+        <p><small>Already have an account?<a href='/login'> Let's LogIn.</a></small></p>
         <br/>
-          <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Register</button>
+          { !loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Register</button>}
+          { loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled >Loading...</button>}
         </form>
       </div>
       </div>

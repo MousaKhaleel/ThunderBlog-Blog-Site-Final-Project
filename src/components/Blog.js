@@ -3,7 +3,7 @@ import './blogStyle.css'
 
 function Blog(blog) {
   const id=blog.id
-  return (
+  return (<span className='link'>
     <a href={`/blogcontent/${id}`}>
     <div className="blogPreviewContainer">
       {/* <img src="https://picsum.photos/200" /> */}
@@ -13,6 +13,7 @@ function Blog(blog) {
       </div>
     </div>
     </a>
+    </span>
   );
 }
 
