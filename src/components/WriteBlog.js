@@ -20,7 +20,6 @@ function WriteBlog() {
         setId(info.id)
       })
     },[])
-    console.log(id)
   })
 
   function handleTitleChange(e) {

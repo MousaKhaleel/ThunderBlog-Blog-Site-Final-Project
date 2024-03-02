@@ -25,15 +25,26 @@ function BlogContent() {
         })
 
     useEffect(()=>{
-        setLoading(true)
-        fetch('http://localhost:8000/content/'+id)
-        .then(res=>{
-            res.json().then(con=>{
-                setLoading(false)
-                setContent(con)
+        if(userId){
+            setLoading(true)
+            fetch('http://localhost:8000/content/'+id+'/'+userId)
+            .then(res=>{
+                res.json().then(con=>{
+                    setLoading(false)
+                    setContent(con)
+                })
             })
+    } else{
+    setLoading(true)
+    fetch('http://localhost:8000/content/'+id)
+    .then(res=>{
+        res.json().then(con=>{
+            setLoading(false)
+            setContent(con)
         })
-    },[])
+    })
+}
+    },[userId])
 
         // trying server    app.get('/content/:id/:userId', async(req,res)=>{
     //     const id = new ObjectId(req.params.id);

@@ -101,8 +101,22 @@ app.get('/allblogs',async(req,res)=>{
 
 app.get('/content/:id', async(req,res)=>{
   const id = new ObjectId(req.params.id);
-  const rus=await blogCollection.findOne({'_id':id})
-  res.json(rus)
+  const Content=await blogCollection.findOne({'_id':id})
+  res.json(Content)
+})
+
+app.get('/content/:id/:userId', async(req,res)=>{
+  const id = new ObjectId(req.params.id);
+  const Content=await blogCollection.findOne({'_id':id})
+          if(Content){
+        const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $push: { History: id }})
+        }
+  res.json(Content)
+})
+
+app.get('/history/:userId', async(req,res)=>{
+  const hist= await userCollection.findOne({ '_id': new ObjectId(req.params.userId)})
+  res.json(hist.History)
 })
 
 
