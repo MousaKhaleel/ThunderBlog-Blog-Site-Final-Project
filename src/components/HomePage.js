@@ -49,7 +49,7 @@ useEffect(() => {
       <div>
             <HeroSection />
             {!name && <>
-              <div className="allBlogsContainer"y>
+              <div className="allBlogsContainer">
       <main>
       {allBlogs && <h1>All Blogs, <a href="/login">LogIn</a> to see yours here!</h1>}
        {allLoading && <h2 className="hl">Loading...</h2>}
