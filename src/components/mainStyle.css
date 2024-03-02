@@ -64,8 +64,8 @@
     color: rgb(0, 166, 204);
   }
   
-  /* //myblogs// */
-  .myBlogsContainer{
+  /* //allblogs// */
+  .allBlogsContainer{
     margin-block:2%;
     min-height: 60vh;
   }

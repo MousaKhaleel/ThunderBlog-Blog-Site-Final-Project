@@ -15,7 +15,7 @@ import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
 import WriteBlog from './components/WriteBlog';
 import BlogContent from './components/BlogContent';
-import MyBlogs from './components/MyBlogs';
+import AllBlogs from './components/AllBlogs';
 import UserHistory from './components/UserHistory';
 import ProfileDetails from './components/ProfileDetails';
 
@@ -47,7 +47,7 @@ function App() {
                 <Route path="/profiledetails" element={<ProfileDetails />} />
             </Routes>
             <Routes>
-                <Route path="/myblogs" element={<MyBlogs />} />
+                <Route path="/allblogs" element={<AllBlogs />} />
             </Routes>
             <Routes>
                 <Route path="/userhistory" element={<UserHistory />} />

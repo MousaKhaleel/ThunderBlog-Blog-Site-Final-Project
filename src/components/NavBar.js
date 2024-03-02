@@ -57,7 +57,7 @@ function NavBar() {
         {name && (
           <>
             <li className="nav-item">
-              <a className="nav-link" href="/myblogs"><FaCloud /> My Blogs</a>
+              <a className="nav-link" href="/allblogs"><FaCloud /> All Blogs</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/writeblog"><TbWritingSign /> Write a blog</a>
@@ -70,7 +70,7 @@ function NavBar() {
         {!name && (
           <>
             <li className="nav-item">
-              <a className="nav-link" href="/login"><FaCloud /> My Blogs</a>
+              <a className="nav-link" href="/allblogs"><FaCloud /> All Blogs</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/login"><TbWritingSign /> Write a blog</a>

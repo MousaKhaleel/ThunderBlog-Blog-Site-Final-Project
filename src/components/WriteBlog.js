@@ -45,7 +45,7 @@ function WriteBlog() {
   }
 
   if(redirect){
-    return <Navigate to={'/myblogs'} />
+    return <Navigate to={'/'} />
 }
 
     return ( 
