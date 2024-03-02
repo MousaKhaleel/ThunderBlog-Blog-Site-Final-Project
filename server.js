@@ -107,6 +107,13 @@ app.get('/content/:id', async(req,res)=>{
 })
 
 
+app.get('/userblogs/:id', async(req,res)=>{
+  const id = req.params.id;
+  rus=await blogCollection.find({'AuthorID':id}).toArray()
+  res.json(rus)
+})
+
+
 var server=app.listen(8000,function(){
     var host=server.address().address;
     var port=server.address().port;

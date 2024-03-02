@@ -39,7 +39,7 @@ function NavBar() {
 <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'rgb(11, 36, 71)' }}>
   <div className="container-fluid">
     <a className="navbar-brand" href="/">
-      <img src={Logo} alt="ThunderBlog" width="40" />ThunderBlog
+      <img src={Logo} alt="ThunderBlog" width="40" /> ThunderBlog
     </a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
@@ -83,8 +83,8 @@ function NavBar() {
               <MdAccountBox /> Welcome {name}
             </a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a className="dropdown-item" href="/login"><MdAccountCircle /> Account</a></li>
-              <li><a className="dropdown-item" href="#"><FaHistory /> History</a></li>
+              <li><a className="dropdown-item" href="/profiledetails"><MdAccountCircle /> Account</a></li>
+              <li><a className="dropdown-item" href="/userhistory"><FaHistory /> History</a></li>
               <li><a className="dropdown-item" onClick={handleLogout} href="/"><IoIosLogOut /> Log out</a></li>
             </ul>
           </li>

@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import { useState, useEffect } from 'react';
 import WriteBlog from './components/WriteBlog';
 import BlogContent from './components/BlogContent';
+import MyBlogs from './components/MyBlogs';
 
 function App() {
 
@@ -51,6 +52,15 @@ function App() {
             </Routes>
             <Routes>
                 <Route path="/blogcontent/:id" element={<BlogContent />} />
+            </Routes>
+            <Routes>
+                <Route path="/profiledetails" element={<BlogContent />} />
+            </Routes>
+            <Routes>
+                <Route path="/myblogs" element={<MyBlogs />} />
+            </Routes>
+            <Routes>
+                <Route path="/userhistory" element={<BlogContent />} />
             </Routes>
         </BrowserRouter>
         <Footer />
