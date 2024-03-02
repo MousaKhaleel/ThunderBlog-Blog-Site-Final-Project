@@ -32,7 +32,7 @@ function UserHistory() {
         } catch (error) {
           console.log(error)
         }
-        },[])
+        },[])//userId
 
         console.log(history)
 

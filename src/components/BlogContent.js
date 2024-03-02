@@ -4,9 +4,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function BlogContent() {
+    const [userId,setUserId]=useState(null)
     const {id}=useParams()
     const[content,setContent]=useState('');
     const[loading,setLoading]=useState(false);
+
+    useEffect(()=>{
+        try {
+          fetch('http://localhost:8000/profile',{
+            credentials:'include',
+            method:'GET'
+          }).then(res=>{
+            res.json().then(info=>{
+              setUserId(info.id)
+            })
+          },[])
+        } catch (error) {
+          console.log(error)
+        }
+        })
+
     useEffect(()=>{
         setLoading(true)
         fetch('http://localhost:8000/content/'+id)
