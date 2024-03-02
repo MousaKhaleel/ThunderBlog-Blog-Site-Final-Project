@@ -54,3 +54,11 @@
     margin-block: 4%;
   }
   }
+
+  .contentContainer h2{
+    text-align: center;
+  }
+
+  .contentContainer p{
+    min-height: 60vh;
+  }

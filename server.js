@@ -18,6 +18,8 @@ app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json())//instade of body parser
 app.use(cp())
 
+const { ObjectId } = require('mongodb');
+
 const secret='bu43ry8477r8gbn4f3e834iu';
 // var bodyParse= require('body-parser')
 
@@ -96,6 +98,12 @@ app.post('/addblog',async(req,res)=>{
 app.get('/allblogs',async(req,res)=>{
     const allBlogs= await blogCollection.find({}).toArray()
     res.send(allBlogs)
+})
+
+app.get('/content/:id', async(req,res)=>{
+  const id = new ObjectId(req.params.id);
+  rus=await blogCollection.findOne({'_id':id})
+  res.json(rus)
 })
 
 

@@ -50,7 +50,7 @@ function App() {
                 <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
             <Routes>
-                <Route path="/blogcontent" element={<BlogContent />} />
+                <Route path="/blogcontent/:id" element={<BlogContent />} />
             </Routes>
         </BrowserRouter>
         <Footer />

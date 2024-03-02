@@ -25,7 +25,6 @@ function NavBar() {
         setName(info.name)
       })
     },[])
-    console.log(name)
     })
 
     function handleLogout() {

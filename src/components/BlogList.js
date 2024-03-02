@@ -3,12 +3,11 @@ import Blog from "./Blog";
 
 function BlogList({blogs}) {
 
-  console.log(blogs)
   
   return (
 <div>
   {blogs.map((item, i) => (
-    <Blog key={i} Title={item.Title} />
+    <Blog key={i} Title={item.Title} id={item._id} />
   ))}
 </div>
   );
