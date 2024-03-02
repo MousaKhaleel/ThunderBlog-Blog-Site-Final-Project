@@ -78,3 +78,10 @@
     text-align: center;
     margin-top: 2%;
   }
+  
+  /* //profiledetails// */
+  
+  .detailsContainer{
+    margin-block: 4%;
+    min-height: 60vh;
+  }

@@ -33,10 +33,10 @@ app.get('/',function(req,res)
 
 
 app.post('/login', async (req, res) => {
-    const { name, email, password } = req.body;
-    const findAuthor = await userCollection.findOne({ 'Name': name, 'Email': email, 'Password': password });
+    const { email, password } = req.body;
+    const findAuthor = await userCollection.findOne({ 'Email': email, 'Password': password });
     if (findAuthor) {
-      const token = jwt.sign({ name, id: findAuthor._id }, secret);
+      const token = jwt.sign({ name: findAuthor.Name, id: findAuthor._id, email, password }, secret);
       res.cookie('token', token, { httpOnly: true }).json('ok');
     } else {
       res.status(400).json('Wrong info try again');

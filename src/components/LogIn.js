@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 function LogIn() {
-  const [name, setName]=useState('');
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
   const [loading, setLoading]=useState(false);
@@ -17,7 +16,7 @@ function LogIn() {
     try {
       const res = await fetch('http://localhost:8000/login', {
         method: 'POST',
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
@@ -26,7 +25,6 @@ function LogIn() {
         const data = await res.json();
         setLoading(false);
         setRedirect(true);
-        localStorage.setItem('token', data.token);
       } else {
         const errorMessage = await res.text();
         throw new Error(errorMessage);
@@ -55,9 +53,6 @@ function LogIn() {
     <br/>
       <form onSubmit={handleLogin}>
         <div className="form-group">
-          <label htmlFor="email">Name</label>
-          <input name="name" type="text" className="form-control" value={name} onChange={e=>setName(e.target.value)} id="name" aria-describedby="emailHelp" placeholder="Enter your name" />
-          <br/>
           <label htmlFor="email">Email</label>
           <input name="email" type="email" className="form-control" value={email} onChange={e=>setEmail(e.target.value)} id="email" aria-describedby="emailHelp" placeholder="Enter email" />
       <br/>
