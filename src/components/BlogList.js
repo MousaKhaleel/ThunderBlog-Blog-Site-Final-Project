@@ -7,7 +7,7 @@ function BlogList({blogs}) {
   return (
 <div>
   {blogs.map((item, i) => (
-    <Blog key={i} Title={item.Title} id={item._id} />
+    <Blog key={i} Title={item.Title} Preview={item.Preview} id={item._id} />
   ))}
 </div>
   );
