@@ -13,9 +13,9 @@ function Footer() {
                     <div className="col-sm-6 col-md-3 item">
                         <h3>Help</h3>
                         <ul>
-                            <li><a href="#">Help center</a></li>
-                            <li><a href="#">Call us</a></li>
-                            <li><a href="#">How to blog</a></li>
+                            <li><a href="/aboutus">Help center</a></li>
+                            <li><a href="/aboutus">Call us</a></li>
+                            <li><a href="/aboutus">How to blog</a></li>
                         </ul>
                     </div>
                     <div className="col-sm-6 col-md-3 item">

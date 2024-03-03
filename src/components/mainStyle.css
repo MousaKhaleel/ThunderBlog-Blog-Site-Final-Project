@@ -22,7 +22,7 @@
   min-height: 60vh;
 }
 .teamContainer{
-  margin-top: 10%;
+  margin-top: 1%;
   display: grid;
   grid-auto-flow: column;
   justify-content: space-around;
