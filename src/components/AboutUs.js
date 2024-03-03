@@ -22,7 +22,26 @@ function AboutUs() {
   </div>
 </div>
 </div>
+<p style={{marginBlock:'2%',background:'rgb(247,247,247)', padding:'2%',borderRadius:'4px'}}>
+Welcome to <span style={{color:'rgb(0, 166, 204)'}}>ThunderBlog</span>, where we write history! We are passionate about sharing knowledge and creating a community of unique individuals who want to explore and share their explorations.
 
+
+At <span style={{color:'rgb(0, 166, 204)'}}>ThunderBlog</span>, we believe that knowledge is power, and we want to empower you with information that can change your life.
+
+
+We made it our mission to create a user-friendly platform that enhances your reading experience.
+
+
+We value the diversity of opinions and encourage conversations. We believe that everyone has a story to tell and a unique viewpoint to share. We believe in you.
+
+
+<span style={{color:'rgb(0, 166, 204)'}}>ThunderBlog</span> aims to be your trusted place on your journey of blogging, exploration, and growth. We are here to answer your expectations. Join us, and let's make the world a better place.
+<br/>
+<br/>
+Thank you for being a part of our community.
+<br/>
+<span style={{color:'gery'}}>ThunderBlog</span> Inc.
+</p>
         </div>
      );
 }
