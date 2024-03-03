@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './mainStyle.css'
 import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [name, setName]=useState('');
@@ -52,7 +53,7 @@ if(redirect){
             <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Password" />
           </div>
           <br />
-        <p><small>Already have an account?<a href='/login'> Let's LogIn.</a></small></p>
+        <p><small>Already have an account?<Link to='/login'> Let's LogIn.</Link></small></p>
         <br/>
           { !loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Register</button>}
           { loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled >Loading...</button>}

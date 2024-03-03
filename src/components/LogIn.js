@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './mainStyle.css'
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function LogIn() {
   const [email, setEmail]=useState('');
@@ -60,7 +61,7 @@ function LogIn() {
           <input name="password" type="password" className="form-control" value={password} onChange={e=>setPassword(e.target.value)} id="password" placeholder="Password" />
         </div>
         <br />
-        <p><small>Don't have an account yet?<a href='/register'> Let's Blog!</a></small></p>
+        <p><small>Don't have an account yet?<Link to='/register'> Let's Blog!</Link></small></p>
         <br/>
         {!loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >LogIn</button>}
         {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled >Loading...</button>}

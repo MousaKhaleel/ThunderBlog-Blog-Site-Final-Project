@@ -1,6 +1,7 @@
 import './mainStyle.css'
 import backgroundImage from '../assets/pexels-picography-4458.jpg';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   const [name,setName]=useState(null)
@@ -47,14 +48,14 @@ function HeroSection() {
       </div>
     </div>
     {!name && <div className="lc-block">
-      <a className="btn" href="/login" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
+      <Link className="btn" to="/login" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
-      </a>
+      </Link>
     </div>}
     {name && <div className="lc-block">
-      <a className="btn" href="/writeblog" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
+      <Link className="btn" to="/writeblog" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
-      </a>
+      </Link>
     </div>}
   </div>
 </div>

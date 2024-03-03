@@ -7,6 +7,7 @@ import './mainStyle.css'
 import { MdOutlineSecurity } from "react-icons/md";
 import { SiFlyway } from "react-icons/si";
 import { GiStrong } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const [id,setId]=useState(null)
@@ -56,7 +57,7 @@ useEffect(() => {
             {!name && <>
               <div className="allBlogsContainer">
       <main>
-      {allBlogs && <h1>All Blogs, <a href="/login">LogIn</a> to see yours here!</h1>}
+      {allBlogs && <h1>All Blogs, <Link to="/login">LogIn</Link> to see yours here!</h1>}
        {allLoading && <h2 className="hl">Loading...</h2>}
        <hr/>
       {allBlogs && <BlogList blogs={allBlogs}/>}
@@ -65,7 +66,7 @@ useEffect(() => {
             </> }
       <main>{name && <>
       {loading && <h2 className="hl">Loading...</h2>}
-      {blogs && <h1>Your Blogs, <a  href="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{name}</a>.</h1>}
+      {blogs && <h1>Your Blogs, <Link  to="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{name}</Link>.</h1>}
       <hr/>
       {blogs && <BlogList blogs={blogs} />}
       </>}
