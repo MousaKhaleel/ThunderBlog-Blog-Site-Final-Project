@@ -60,7 +60,7 @@ function LogIn() {
           <input name="password" type="password" className="form-control" value={password} onChange={e=>setPassword(e.target.value)} id="password" placeholder="Password" />
         </div>
         <br />
-        <p><small>Don't have an account yet?<a href='/register'> Let's start Blogging!</a></small></p>
+        <p><small>Don't have an account yet?<a href='/register'> Let's Blog!</a></small></p>
         <br/>
         {!loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >LogIn</button>}
         {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled >Loading...</button>}

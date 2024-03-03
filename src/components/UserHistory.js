@@ -65,6 +65,8 @@ function UserHistory() {
         <div>
         <main>
           {loading && <h2 className="hl">Loading...</h2>}
+          <h1>History</h1>
+          <hr/>
           <BlogList blogs={historyBlogs} />
           </main>
         </div>

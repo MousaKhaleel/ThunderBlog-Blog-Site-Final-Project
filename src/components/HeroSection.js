@@ -42,7 +42,7 @@ function HeroSection() {
     <div className="lc-block col-md-8">
       <div editable="rich">
         <p className="lead" style={{color:'white'}}>
-        Write, Read and Discover like never before.
+        Start a Blog, and Write like never before.
         </p>
       </div>
     </div>

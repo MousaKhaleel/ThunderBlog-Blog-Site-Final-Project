@@ -46,21 +46,6 @@ function BlogContent() {
 }
     },[userId])
 
-        // trying server    app.get('/content/:id/:userId', async(req,res)=>{
-    //     const id = new ObjectId(req.params.id);
-    //     const viewedBlogs=await blogCollection.findOne({'_id':id})
-    //     if(viewedBlogs){
-    //     const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $push: { 'History': id }})
-    //     }
-    //     res.json(viewedBlogs)
-    //   })
-    //   // app.get('/history/:userId', async(req,res)=>{
-    //   //   const hist= await userCollection.findOne({ '_id': new ObjectId(req.params.userId)})
-    //   //   console.log(hist)
-    //   //   res.json(hist)
-    //   // })
-      
-
     return ( 
         <main>
         <div className="contentContainer">

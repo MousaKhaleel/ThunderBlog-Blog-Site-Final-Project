@@ -63,7 +63,7 @@ function WriteBlog() {
       className="form-control"
       id="title"
       value={title} onChange={handleTitleChange}
-      placeholder="Be creative"
+      placeholder="Be creative!"
     />
   </div>
   <br/>
