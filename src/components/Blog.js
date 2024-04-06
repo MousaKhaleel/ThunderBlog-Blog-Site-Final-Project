@@ -9,6 +9,8 @@ function Blog(blog) {
     <div className="blogPreviewContainer">
       <div>
         <h2>{blog.Title}</h2>
+        <hr/>
+        <br/>
         <p>{blog.Preview}</p>
       </div>
     </div>

@@ -18,11 +18,13 @@ import BlogContent from './components/BlogContent';
 import AllBlogs from './components/AllBlogs';
 import UserHistory from './components/UserHistory';
 import ProfileDetails from './components/ProfileDetails';
+import { UserProvider } from './components/UserContext';
 
 function App() {
 
   return (
     <div className="App">
+    <UserProvider>
     <NavBar />
     <BrowserRouter>
             <Routes>
@@ -54,6 +56,7 @@ function App() {
             </Routes>
         </BrowserRouter>
         <Footer />
+        </UserProvider>
     </div>
   );
 }
