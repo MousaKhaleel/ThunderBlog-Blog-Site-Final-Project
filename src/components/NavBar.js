@@ -1,4 +1,4 @@
-import { useEffect, useState  } from 'react';
+import { useContext, useEffect, useState  } from 'react';
 import Logo from '../assets/3XHUPg-LogoMakr.png'
 import defaultAv from '../assets/avatar/profile-42914_1280.png'
 import $ from 'jquery'; 
@@ -12,33 +12,19 @@ import { MdAccountBox } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { IoMdLogIn } from "react-icons/io";
 import { TbWritingSign } from "react-icons/tb";
+import { UserContext } from './UserContext';
 
 
 function NavBar() {
-  const [name,setName]=useState(null)
-
-  useEffect(()=>{
-    try {
-      fetch('http://localhost:8000/profile',{
-        credentials:'include',
-        method:'GET'
-      }).then(res=>{
-        res.json().then(info=>{
-          setName(info.name)
-        })
-      },[])
-    } catch (error) {
-      console.log(error)
-    }
-    })
+  const {userName, setUserName}=useContext(UserContext);
 
     function handleLogout() {
       fetch('http://localhost:8000/logout',{
         credentials:'include',
         method:'POST'
       })
-      setName(null)
-    }
+      setUserName(null)
+    }//
 
     return ( 
 <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'rgb(11, 36, 71)' }}>
@@ -54,7 +40,7 @@ function NavBar() {
         <li className="nav-item">
           <a className="nav-link" aria-current="page" href="/"><FaHome /> Home</a>
         </li>
-        {name && (
+        {userName && (
           <>
             <li className="nav-item">
               <a className="nav-link" href="/allblogs"><FaCloud /> All Blogs</a>
@@ -67,7 +53,7 @@ function NavBar() {
             </li>
           </>
         )}
-        {!name && (
+        {!userName && (
           <>
             <li className="nav-item">
               <a className="nav-link" href="/allblogs"><FaCloud /> All Blogs</a>
@@ -81,11 +67,11 @@ function NavBar() {
           </>
         )}
       </ul>
-      {name && (
+      {userName && (
         <ul className="navbar-nav">
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}>
-              <MdAccountBox /> {name}
+              <MdAccountBox /> {userName}
             </a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a className="dropdown-item" href="/profiledetails"><MdAccountCircle /> Profile</a></li>
@@ -95,7 +81,7 @@ function NavBar() {
           </li>
         </ul>
       )}
-      {!name && (
+      {!userName && (
         <ul className="navbar-nav">
           <li className="nav-item">
             <a className="nav-link" href="/login" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}><IoMdLogIn /> Login</a>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Blog from "./Blog";
 import BlogList from "./BlogList";
 import HeroSection from "./HeroSection";
@@ -8,30 +8,20 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { SiFlyway } from "react-icons/si";
 import { GiStrong } from "react-icons/gi";
 import { Link } from 'react-router-dom';
+import { UserContext } from "./UserContext";
 
 function HomePage() {
-  const [id,setId]=useState(null)
   const[blogs,setBlogs]=useState('');
   const[allBlogs,setAllBlogs]=useState('');
-  const[name,setName]=useState(null);
   const[loading,setLoading]=useState(false);
   const[allLoading,setAllLoading]=useState(false);
 
-  useEffect(()=>{
-    fetch('http://localhost:8000/profile',{
-      credentials:'include',
-      method:'GET'
-    }).then(res=>{
-      res.json().then(info=>{
-        setId(info.id)
-        setName(info.name)
-      })
-    },[])
-    })
+  const {userName, userId}=useContext(UserContext);
+
 useEffect(() => {
-if (id) {
+if (userId) {
   setLoading(true);
-  fetch('http://localhost:8000/userblogs/' + id, {
+  fetch('http://localhost:8000/userblogs/' + userId, {
     credentials: 'include'
   })
     .then(res => {
@@ -41,7 +31,7 @@ if (id) {
       });
     });
 }
-}, [id]);
+}, [userId]);
 
 useEffect(() => {
   setAllLoading(true)
@@ -54,7 +44,7 @@ useEffect(() => {
     return ( 
       <div>
             <HeroSection />
-            {!name && <>
+            {!userName && <>
               <div className="allBlogsContainer">
       <main>
       {allBlogs && <h1>All Blogs, <Link to="/login">LogIn</Link> to see yours here!</h1>}
@@ -64,9 +54,9 @@ useEffect(() => {
       </main>
       </div>
             </> }
-      <main>{name && <>
+      <main>{userName && <>
       {loading && <h2 className="hl">Loading...</h2>}
-      {blogs && <h1>Your Blogs, <Link  to="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{name}</Link>.</h1>}
+      {blogs && <h1>Your Blogs, <Link  to="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{userName}</Link>.</h1>}
       <hr/>
       {blogs && <BlogList blogs={blogs} />}
       </>}

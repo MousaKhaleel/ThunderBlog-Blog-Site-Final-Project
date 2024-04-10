@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import BlogList from "./BlogList";
+import { UserContext } from "./UserContext";
 
 function UserHistory() {
     const [history,setHistory]=useState([]);
     const[historyBlogs,setHistoryBlogs]=useState([]);
-    const [id,setId]=useState(null)
     const [loading,setLoading]=useState(false)
 
-    useEffect(()=>{
-      try {
-        setLoading(true)
-        fetch('http://localhost:8000/profile',{
-          credentials:'include',
-          method:'GET'
-        }).then(res=>{
-          res.json().then(info=>{
-            setId(info.id)
-          })
-        },[])
-      } catch (error) {
-        console.log(error)
-      }
-      },[])
+    const {userId}=useContext(UserContext);
 
       useEffect(() => {
-        if (id) {
-          fetch('http://localhost:8000/history/' + id, {
+        if (userId) {
+          fetch('http://localhost:8000/history/' + userId, {
             credentials: 'include'
           })
             .then(res => {
@@ -34,7 +20,7 @@ function UserHistory() {
               });
             });
         }
-        }, [id]);
+        }, [userId]);
 
         useEffect(() => {
             const fetchHistoryBlogs = async () => {

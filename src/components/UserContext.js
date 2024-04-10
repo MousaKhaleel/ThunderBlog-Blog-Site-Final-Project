@@ -4,7 +4,8 @@ import React, { createContext, useState, useEffect } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [userName,setUserName]=useState(null)
+const [userId,setUserId]=useState(null)
+const [userName,setUserName]=useState(null)
 const [userEmail, setUserEmail]=useState('');
 const [userPassword, setUserPassword]=useState('');
 
@@ -16,6 +17,7 @@ useEffect(()=>{
         method:'GET'
       }).then(res=>{
         res.json().then(info=>{
+          setUserId(info.id)
           setUserName(info.name)
           setUserEmail(info.email)
           setUserPassword(info.password)
@@ -40,7 +42,7 @@ useEffect(()=>{
     }, [userName]);
   
     return (
-      <UserContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword}}>
+      <UserContext.Provider value={{userId, setUserId, userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword}}>
         {children}
       </UserContext.Provider>
     );
