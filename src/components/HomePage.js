@@ -65,7 +65,7 @@ useEffect(() => {
         <br/>
       <div className="flexedContainer">
       <div className="imageContainer">
-        <img src={Blogger} width={'300px'}/></div>
+        <img src={Blogger} alt="Blogger" width={'300px'}/></div>
         <div className="textContainer">
         <h4>We all have interesting things in our lives, so why don't we share them?</h4>
         <p>Do you want to share interesting things but are concerned about your privacy? Fear not; here we provide our bloggers with the ability to share anonymously.</p>

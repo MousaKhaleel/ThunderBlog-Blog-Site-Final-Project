@@ -28,7 +28,7 @@ function Footer() {
                     </div>
                     <div className="col-md-6 item text">
                     <a href="/" >
-                        <img src={Logo2} width={'200px'}/></a>
+                        <img src={Logo2} alt="ThunderBlog Inc." width={'200px'}/></a>
                         <p>we invite you to write, write like never before. Here, we believe in giving people the power to be the change, to make a difference, and to have their voices heard. Because we belive in the importance of expression and the impact it can have on the world. be the change you want to see.</p>
                     </div>
                     <div className="col item social"><a href="https://www.linkedin.com/in/mousa-khaleel/"><FaLinkedinIn /></a><a href="https://github.com/MousaKhaleel"><FaGithub /></a><a href="https://jo.linkedin.com/in/yazeed-fayoumi"><FaLinkedinIn /></a><a href="https://github.com/YazeedFayoumi"><FaGithub /></a></div>
