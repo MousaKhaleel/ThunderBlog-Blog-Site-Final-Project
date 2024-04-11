@@ -5,6 +5,7 @@ import './mainStyle.css'
 import './footerStyle.css'
 
 function Footer() {
+    const currentYear = new Date().getFullYear();
     return ( 
         <div className="footer-dark">
         <footer>
@@ -33,7 +34,7 @@ function Footer() {
                     </div>
                     <div className="col item social"><a href="https://www.linkedin.com/in/mousa-khaleel/"><FaLinkedinIn /></a><a href="https://github.com/MousaKhaleel"><FaGithub /></a><a href="https://jo.linkedin.com/in/yazeed-fayoumi"><FaLinkedinIn /></a><a href="https://github.com/YazeedFayoumi"><FaGithub /></a></div>
                 </div>
-                <p className="copyright">ThunderBlog Inc. © 2024</p>
+                <p className="copyright">ThunderBlog Inc. © {currentYear}</p>
             </div>
         </footer>
     </div>
