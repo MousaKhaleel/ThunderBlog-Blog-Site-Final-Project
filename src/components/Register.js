@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './mainStyle.css'
+<<<<<<< HEAD
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+=======
+>>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
 
 function Register() {
   const [name, setName]=useState('');
@@ -9,7 +12,6 @@ function Register() {
   const [password, setPassword]=useState('');
   const [confirmPassword, setConfirmPassword]=useState('');
   const [loading, setLoading]=useState(false);
-  const [redirect, setRedirect]=useState(false);
 
 async function handleRegister(e) {
     e.preventDefault()
@@ -21,16 +23,11 @@ async function handleRegister(e) {
     headers:{'Content-Type':'application/json'}
   })
   setLoading(false)
-  setRedirect(true)
 }
 else{
   alert('Password and confirm password do not match')
   setLoading(false)
 }
-}
-
-if(redirect){
-  return <Navigate to={'/login'} />
 }
 
     return ( 

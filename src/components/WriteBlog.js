@@ -5,7 +5,6 @@ import { Navigate } from 'react-router-dom';
 function WriteBlog() {
 
   const [title, setTitle] = useState('');
-  const [preview, setPreview] = useState('');
   const [content, setContent] = useState('');
   const [id,setId]=useState(null)
   const [loading, setLoading]=useState(false);
@@ -26,10 +25,6 @@ function WriteBlog() {
     setTitle(e.target.value);
   }
 
-  function handlePreviewChange(e) {
-    setPreview(e.target.value);
-  }
-
   function handleContentChange(e) {
     setContent(e.target.value);
   }
@@ -39,7 +34,7 @@ function WriteBlog() {
     setLoading(true)
     const res=await fetch('http://localhost:8000/addblog',{
     method:'POST',
-    body: JSON.stringify({title, preview, content, id}),
+    body: JSON.stringify({title, content, id}),
     headers:{'Content-Type':'application/json'}
   })
   if(res.ok){
@@ -66,17 +61,6 @@ function WriteBlog() {
       placeholder="Be creative!"
     />
   </div>
-  <br/>
-  <div className="form-group">
-    <label htmlFor="title">Preview</label>
-    <input
-      type="text"
-      className="form-control"
-      id="title"
-      value={preview} onChange={handlePreviewChange}
-      placeholder="This should grab the user attention"
-    />
-  </div>
   <div className="form-group">
   <br/>
     <label htmlFor="content">Content</label>
@@ -84,7 +68,7 @@ function WriteBlog() {
       className="form-control"
       id="content"
       value={content} onChange={handleContentChange}
-      rows={12}
+      rows={14}
       defaultValue={""}
     />
   </div>

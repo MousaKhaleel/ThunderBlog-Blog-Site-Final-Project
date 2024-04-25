@@ -8,6 +8,7 @@ function BlogContent() {
     const {id}=useParams()
     const[content,setContent]=useState('');
     const[loading,setLoading]=useState(false);
+<<<<<<< HEAD
 
     useEffect(()=>{
         try {
@@ -46,10 +47,22 @@ function BlogContent() {
 }
     },[userId])
 
+=======
+    useEffect(()=>{
+        setLoading(true)
+        fetch('http://localhost:8000/content/'+id)
+        .then(res=>{
+            res.json().then(con=>{
+                setLoading(false)
+                setContent(con)
+            })
+        })
+    },[])
+>>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
     return ( 
         <main>
         <div className="contentContainer">
-        {loading && <h2 className='hl'>loading...</h2>}
+        {loading && <p>loading...</p>}
             <h2>{content.Title}</h2>
             <p>{content.Content}</p>
         </div>

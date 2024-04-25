@@ -49,8 +49,9 @@ app.post('/register',async(req,res)=>{
     try {
         const { name, email, password } = req.body;
         const existingUser = await userCollection.findOne({ 'Email': email });
+
         if (!existingUser) {
-            await userCollection.insertOne({ 'Name': name, 'Email': email, 'Password': password,'History':[] });
+            await userCollection.insertOne({ 'Name': name, 'Email': email, 'Password': password });
             res.send('Registration successful');
         } else {
             res.status(400).send('User already exists');
@@ -85,8 +86,8 @@ app.get('/profile', (req, res) => {
 app.post('/addblog',async(req,res)=>{
 
     try {
-        const { title, preview, content, id } = req.body;
-            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview':preview, 'AuthorID': id });
+        const { title, content, id } = req.body;
+            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'AuthorID': id });
             res.send('add successfully');
     } catch (error) {
         console.error('Error:', error);
@@ -101,6 +102,7 @@ app.get('/allblogs',async(req,res)=>{
 
 app.get('/content/:id', async(req,res)=>{
   const id = new ObjectId(req.params.id);
+<<<<<<< HEAD
   const Content=await blogCollection.findOne({'_id':id})
   res.json(Content)
 })
@@ -117,6 +119,10 @@ app.get('/content/:id/:userId', async(req,res)=>{
 app.get('/history/:userId', async(req,res)=>{
   const hist= await userCollection.findOne({ '_id': new ObjectId(req.params.userId)})
   res.json(hist.History)
+=======
+  rus=await blogCollection.findOne({'_id':id})
+  res.json(rus)
+>>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
 })
 
 
