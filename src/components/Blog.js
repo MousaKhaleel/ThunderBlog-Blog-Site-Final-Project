@@ -9,7 +9,7 @@ function Blog(blog) {
     <div className="blogPreviewContainer">
       <div>
         <h2>{blog.Title}</h2>
-        <p>Click to read the content.</p>
+        <p>{blog.Preview}</p>
       </div>
     </div>
     </Link>

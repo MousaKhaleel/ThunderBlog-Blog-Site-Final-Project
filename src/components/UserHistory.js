@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react"
 import BlogList from "./BlogList";
 
@@ -70,12 +69,6 @@ function UserHistory() {
           <hr/>
           <BlogList blogs={historyBlogs} />
           </main>
-=======
-function UserHistory() {
-    return ( 
-        <div>
-            <p>temp</p>
->>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
         </div>
      );
 }
