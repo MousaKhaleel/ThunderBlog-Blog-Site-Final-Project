@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import './mainStyle.css'
 <<<<<<< HEAD
-<<<<<<< HEAD
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-=======
->>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
 =======
 >>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
 

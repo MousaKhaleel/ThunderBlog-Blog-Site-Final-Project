@@ -58,9 +58,6 @@ function BlogContent() {
             })
         })
     },[])
-<<<<<<< HEAD
->>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
-=======
 >>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
     return ( 
         <main>

@@ -58,11 +58,7 @@ function WriteBlog() {
       className="form-control"
       id="title"
       value={title} onChange={handleTitleChange}
-<<<<<<< HEAD
       placeholder="Be creative!"
-=======
-      placeholder="Be creative"
->>>>>>> parent of 596882f (Merge branch 'main' into Back-End-Blog-Site)
     />
   </div>
   <div className="form-group">
