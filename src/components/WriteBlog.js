@@ -1,26 +1,17 @@
 import './mainStyle.css'
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
 
 function WriteBlog() {
 
   const [title, setTitle] = useState('');
   const [preview, setPreview] = useState('');
   const [content, setContent] = useState('');
-  const [id,setId]=useState(null)
   const [loading, setLoading]=useState(false);
   const [redirect, setRedirect]=useState(false);
 
-  useEffect(()=>{
-    fetch('http://localhost:8000/profile',{
-      credentials:'include',
-      method:'GET'
-    }).then(res=>{
-      res.json().then(info=>{
-        setId(info.id)
-      })
-    },[])
-  })
+  const {userId}=useContext(UserContext);
 
   function handleTitleChange(e) {
     setTitle(e.target.value);
@@ -39,7 +30,7 @@ function WriteBlog() {
     setLoading(true)
     const res=await fetch('http://localhost:8000/addblog',{
     method:'POST',
-    body: JSON.stringify({title, preview, content, id}),
+    body: JSON.stringify({title, preview, content, userId}),
     headers:{'Content-Type':'application/json'}
   })
   if(res.ok){

@@ -1,25 +1,13 @@
 import './mainStyle.css'
 import backgroundImage from '../assets/pexels-picography-4458.jpg';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from './UserContext';
 
 function HeroSection() {
-  const [name,setName]=useState(null)
+const {userName}=useContext(UserContext);
 
-  useEffect(()=>{
-    try {
-      fetch('http://localhost:8000/profile',{
-        credentials:'include',
-        method:'GET'
-      }).then(res=>{
-        res.json().then(info=>{
-          setName(info.name)
-        })
-      },[])
-    } catch (error) {
-      console.log(error)
-    }
-    })
+
     return ( 
         <div
   lc-helper="background"
@@ -47,12 +35,12 @@ function HeroSection() {
         </p>
       </div>
     </div>
-    {!name && <div className="lc-block">
+    {!userName && <div className="lc-block">
       <Link className="btn" to="/login" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
       </Link>
     </div>}
-    {name && <div className="lc-block">
+    {userName && <div className="lc-block">
       <Link className="btn" to="/writeblog" role="button" style={{background: 'rgb(0, 166, 204)', color:'white'}}>
         Let's start
       </Link>
