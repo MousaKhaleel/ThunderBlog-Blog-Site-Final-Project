@@ -1,28 +1,15 @@
 import './mainStyle.css'
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { UserContext } from './UserContext';
 
 function BlogContent() {
-    const [userId,setUserId]=useState(null)
     const {id}=useParams()
     const[content,setContent]=useState('');
     const[loading,setLoading]=useState(false);
 
-    useEffect(()=>{
-        try {
-          fetch('http://localhost:8000/profile',{
-            credentials:'include',
-            method:'GET'
-          }).then(res=>{
-            res.json().then(info=>{
-              setUserId(info.id)
-            })
-          },[])
-        } catch (error) {
-          console.log(error)
-        }
-        })
+    const {userId}=useContext(UserContext);
 
     useEffect(()=>{
         if(userId){
@@ -49,7 +36,7 @@ function BlogContent() {
     return ( 
         <main>
         <div className="contentContainer">
-        {loading && <h2 className='hl'>loading...</h2>}
+        {loading && <h2 className='hl'>loading...</h2>} 
             <h2>{content.Title}</h2>
             <p>{content.Content}</p>
         </div>
