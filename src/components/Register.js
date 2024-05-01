@@ -40,7 +40,7 @@ if(redirect){
             <br/>
         <form onSubmit={handleRegister}>
           <div className="form-group">
-            <label htmlFor="email">Name</label>
+            <label htmlFor="name">Name</label>
             <input name="name" type="text" value={name} onChange={e=>setName(e.target.value)} className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your name" />
             <br/>
             <label htmlFor="email">Email</label>
