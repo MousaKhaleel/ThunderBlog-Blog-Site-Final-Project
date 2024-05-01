@@ -14,6 +14,7 @@ import { IoMdLogIn } from "react-icons/io";
 import { TbWritingSign } from "react-icons/tb";
 import { UserContext } from './UserContext';
 import { ThemeContext } from './ThemeContext';
+import { WiMoonAltThirdQuarter } from "react-icons/wi";
 
 
 function NavBar() {
@@ -83,13 +84,16 @@ function NavBar() {
           </>
         )}
       </ul>
-      {userName && (
         <ul className="navbar-nav">
-        <li className="nav-item">
+        <div className="navbar-nav d-flex align-items-center">
         <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
-  <label class="form-check-label" for="flexSwitchCheckChecked" style={{marginRight:"4px"}}>Theme</label>
+  <label class="form-check-label" for="flexSwitchCheckChecked" style={{color:"rgb(194, 200, 209)", marginRight:"4px"}}><WiMoonAltThirdQuarter /></label>
+  </div>
 </div> 
+      {userName && (
+        <>
+        <li className="nav-item">
         </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}>
@@ -101,21 +105,14 @@ function NavBar() {
               <li><a className="dropdown-item" onClick={handleLogout} href="/"><IoIosLogOut /> Log out</a></li>
             </ul>
           </li>
-        </ul>
+          </>
       )}
       {!userName && (
-        <ul className="navbar-nav">
-        <li className="nav-item">
-        <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
-  <label class="form-check-label" for="flexSwitchCheckChecked" style={{color:"white",marginRight:"4px"}}>Theme</label>
-</div> 
-        </li>
           <li className="nav-item">
             <a className="nav-link" href="/login" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}><IoMdLogIn /> Login</a>
           </li>
-        </ul>
       )}
+        </ul>
     </div>
   </div>
 </nav>

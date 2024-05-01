@@ -3,6 +3,7 @@ import Blog from "./Blog";
 import BlogList from "./BlogList";
 import HeroSection from "./HeroSection";
 import Blogger from '../assets/pexels-andrea-piacquadio-3760378.jpg'
+import Blogger2 from '../assets/pexels-canvastudio-3194523.jpg'
 import './mainStyle.css'
 import { MdOutlineSecurity } from "react-icons/md";
 import { SiFlyway } from "react-icons/si";
@@ -70,6 +71,15 @@ useEffect(() => {
         <h4>We all have interesting things in our lives, so why don't we share them?</h4>
         <p>Do you want to share interesting things but are concerned about your privacy? Fear not; here we provide our bloggers with the ability to share anonymously.</p>
       </div>
+      </div>
+      <br/>
+      <div className="flexedContainer">
+        <div className="textContainer" style={{border:'none',borderRight:"1px solid gray"}}>
+        <h4>Looking to get the attention of businesses looking for talente?</h4>
+        <p>By Writing blogs you can build a personal brand and promote your services and skills online. Show your passion, skills, and knowledge here.</p>
+      </div>
+      <div className="imageContainer" style={{marginLeft: "6%"}}>
+        <img src={Blogger2} alt="Blogger" width={'300px'}/></div>
       </div>
       <br/>
         <div class="separator">Why choose us?</div>
