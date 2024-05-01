@@ -18,6 +18,12 @@ import { ThemeContext } from './ThemeContext';
 
 function NavBar() {
   const {userName, setUserName}=useContext(UserContext);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('box');
+    setIsChecked(savedTheme === 'dark');
+  }, []);
 
     function handleLogout() {
       fetch('http://localhost:8000/logout',{
@@ -28,6 +34,13 @@ function NavBar() {
     }//
 
     const{toggleTheme}=useContext(ThemeContext)
+    
+    function HandleThemeToggle(){
+      toggleTheme();
+      localStorage.setItem('box', isChecked ? 'light' : 'dark');
+      setIsChecked(!isChecked);
+    }
+    console.log(isChecked)
 
     return ( 
 <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'rgb(11, 36, 71)' }}>
@@ -73,7 +86,10 @@ function NavBar() {
       {userName && (
         <ul className="navbar-nav">
         <li className="nav-item">
-        <button className='btn btn-outline-info my-2 my-sm-0' name='theTheme' onClick={toggleTheme} style={{background:"none", border:0,marginRight:"2px"}}>Theme</button> 
+        <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
+  <label class="form-check-label" for="flexSwitchCheckChecked" style={{marginRight:"4px"}}>Theme</label>
+</div> 
         </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}>
@@ -90,7 +106,10 @@ function NavBar() {
       {!userName && (
         <ul className="navbar-nav">
         <li className="nav-item">
-        <button className='btn btn-outline-info my-2 my-sm-0' name='theTheme' onClick={toggleTheme} style={{background:"none", border:0, marginRight:"2px"}}>Theme</button> 
+        <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
+  <label class="form-check-label" for="flexSwitchCheckChecked" style={{color:"white",marginRight:"4px"}}>Theme</label>
+</div> 
         </li>
           <li className="nav-item">
             <a className="nav-link" href="/login" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}><IoMdLogIn /> Login</a>
