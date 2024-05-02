@@ -133,6 +133,12 @@ app.get('/historyblogs/:id', async(req,res)=>{
 })
 
 
+app.delete('/deletehistory/:userId', async(req,res)=>{
+        const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $set: { History:[] }})
+  res.json({success: true})
+})
+
+
 var server=app.listen(8000,function(){
     var host=server.address().address;
     var port=server.address().port;
