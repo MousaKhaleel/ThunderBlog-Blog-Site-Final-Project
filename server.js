@@ -139,6 +139,11 @@ app.delete('/deletehistory/:userId', async(req,res)=>{
   res.json({success: true})
 })
 
+app.post('/changePassword', async(req,res)=>{
+const dUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.body.userId) }, { $set: { Password: req.body.password }})
+res.send('password changed successfully');
+})
+
 
 var server=app.listen(8000,function(){
     var host=server.address().address;
