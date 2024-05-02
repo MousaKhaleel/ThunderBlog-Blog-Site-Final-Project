@@ -109,6 +109,7 @@ app.get('/content/:id/:userId', async(req,res)=>{
   const id = new ObjectId(req.params.id);
   const Content=await blogCollection.findOne({'_id':id})
           if(Content){
+        const dUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $pull: { History: id }})
         const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $push: { History: id }})
         }
   res.json(Content)
