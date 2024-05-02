@@ -19,7 +19,7 @@ function AllBlogs() {
       <main>
       {loading && <h2 style={{textAlign:'center',height:'60vh'}}>Loading...</h2>}
       {blogs && <h1>All Blogs</h1>}
-      <hr/>
+      {blogs && <hr/>}
       {blogs && <BlogList blogs={blogs}/>}
       </main>
       </div>

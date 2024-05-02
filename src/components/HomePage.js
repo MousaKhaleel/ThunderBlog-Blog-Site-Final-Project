@@ -50,7 +50,7 @@ useEffect(() => {
       <main>
       {allBlogs && <h1>All Blogs, <Link to="/login">LogIn</Link> to see yours here!</h1>}
        {allLoading && <h2 className="hl">Loading...</h2>}
-       <hr/>
+       {blogs && <hr/>}
       {allBlogs && <BlogList blogs={allBlogs}/>}
       </main>
       </div>
@@ -58,7 +58,7 @@ useEffect(() => {
       <main>{userName && <>
       {loading && <h2 className="hl">Loading...</h2>}
       {blogs && <h1>Your Blogs, <Link  to="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{userName}</Link>.</h1>}
-      <hr/>
+      {blogs && <hr/>}
       {blogs && <BlogList blogs={blogs} />}
       </>}
       <br/>
