@@ -12,7 +12,6 @@ function WriteBlog() {
   const [redirect, setRedirect]=useState(false);
 
   const {userId}=useContext(UserContext);
-
   function handleTitleChange(e) {
     setTitle(e.target.value);
   }

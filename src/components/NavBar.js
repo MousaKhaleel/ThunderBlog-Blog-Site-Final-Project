@@ -18,7 +18,7 @@ import { WiMoonAltThirdQuarter } from "react-icons/wi";
 
 
 function NavBar() {
-  const {userName, setUserName}=useContext(UserContext);
+  const {userName, setUserName, setUserId, setUserEmail, setUserPassword}=useContext(UserContext);
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -32,6 +32,9 @@ function NavBar() {
         method:'POST'
       })
       setUserName(null)
+      setUserId(null)
+      setUserEmail(null)
+      setUserPassword(null)
     }//
 
     const{toggleTheme}=useContext(ThemeContext)
@@ -41,7 +44,6 @@ function NavBar() {
       localStorage.setItem('box', isChecked ? 'light' : 'dark');
       setIsChecked(!isChecked);
     }
-    console.log(isChecked)
 
     return ( 
 <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'rgb(11, 36, 71)' }}>

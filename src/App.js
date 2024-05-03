@@ -27,7 +27,6 @@ function App() {
     const [bg, setBg]=useState()
     const [col, setCol]=useState()
     useEffect(()=>{
-        console.log("isDark:", isDark);
         if(localStorage.getItem('theme') === 'dark'){
         setBg('#333')
         setCol('#a0a0a0')
