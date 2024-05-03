@@ -82,12 +82,11 @@ app.get('/profile', (req, res) => {
   
 
 
-app.post('/addblog',async(req,res)=>{
-
+  app.post('/addblog', async (req, res) => {
     try {
-        const { title, preview, content, userId } = req.body;
-            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview':preview, 'AuthorID': userId });
-            res.send('add successfully');
+        const { title, preview, content, userId, tags } = req.body;
+        await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview': preview, 'AuthorID': userId, 'Tags': tags });
+        res.send('Added successfully');
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
@@ -132,6 +131,23 @@ app.get('/historyblogs/:id', async(req,res)=>{
   rus=await blogCollection.findOne({'_id':id})
   res.json(rus)
 })
+
+app.post('/recommendedblogs', async (req, res) => {
+  try {
+    const { topTags } = req.body;
+
+    let result = await blogCollection.find({ Tags: { $all: topTags } }).toArray();
+    
+    if (result.length === 0) {
+    const result = await blogCollection.find({ Tags: { $in: topTags } }).toArray();
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 app.delete('/deletehistory/:userId', async(req,res)=>{
