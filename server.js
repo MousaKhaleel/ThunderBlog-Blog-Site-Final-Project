@@ -85,8 +85,8 @@ app.get('/profile', (req, res) => {
 app.post('/addblog',async(req,res)=>{
 
     try {
-        const { title, preview, content, id } = req.body;
-            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview':preview, 'AuthorID': id });
+        const { title, preview, content, userId } = req.body;
+            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview':preview, 'AuthorID': userId });
             res.send('add successfully');
     } catch (error) {
         console.error('Error:', error);
