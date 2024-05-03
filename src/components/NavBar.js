@@ -15,6 +15,7 @@ import { TbWritingSign } from "react-icons/tb";
 import { UserContext } from './UserContext';
 import { ThemeContext } from './ThemeContext';
 import { WiMoonAltThirdQuarter } from "react-icons/wi";
+import { MdOutlineYoutubeSearchedFor } from "react-icons/md";
 
 
 function NavBar() {
@@ -68,6 +69,9 @@ function NavBar() {
               <a className="nav-link" href="/writeblog"><TbWritingSign /> Write a blog</a>
             </li>
             <li className="nav-item">
+          <a className="nav-link" aria-current="page" href="/recommended"><MdOutlineYoutubeSearchedFor /> recommended</a>
+        </li>
+            <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
             </li>
           </>
@@ -80,6 +84,9 @@ function NavBar() {
             <li className="nav-item">
               <a className="nav-link" href="/login"><TbWritingSign /> Write a blog</a>
             </li>
+            <li className="nav-item">
+          <a className="nav-link" aria-current="page" href="/login"><MdOutlineYoutubeSearchedFor /> recommended</a>
+        </li>
             <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
             </li>

@@ -20,6 +20,7 @@ import UserHistory from './components/UserHistory';
 import ProfileDetails from './components/ProfileDetails';
 import { UserProvider } from './components/UserContext';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+import Recommendations from './components/Recommendations';
 
 function App() {
 
@@ -71,6 +72,9 @@ function App() {
             </Routes>
             <Routes>
                 <Route path="/userhistory" element={<UserHistory />} />
+            </Routes>
+            <Routes>
+                <Route path="/recommended" element={<Recommendations />} />
             </Routes>
         </BrowserRouter>
         <Footer />
