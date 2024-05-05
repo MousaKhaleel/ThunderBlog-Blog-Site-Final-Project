@@ -40,7 +40,7 @@ if(redirect){
             <br/>
         <form onSubmit={handleRegister}>
           <div className="form-group">
-            <label htmlFor="email">Name</label>
+            <label htmlFor="name">Name</label>
             <input name="name" type="text" value={name} onChange={e=>setName(e.target.value)} className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your name" />
             <br/>
             <label htmlFor="email">Email</label>
@@ -50,7 +50,7 @@ if(redirect){
             <input name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="form-control" id="password" placeholder="Must be +8 chracters" />
             <br/>
             <label htmlFor="cpassword">Confirm Password</label>
-            <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Password" />
+            <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Confirm password" />
           </div>
           <br />
         <p><small>Already have an account?<Link to='/login'> Let's LogIn.</Link></small></p>

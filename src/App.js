@@ -20,6 +20,7 @@ import UserHistory from './components/UserHistory';
 import ProfileDetails from './components/ProfileDetails';
 import { UserProvider } from './components/UserContext';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+import Recommendations from './components/Recommendations';
 
 function App() {
 
@@ -27,7 +28,6 @@ function App() {
     const [bg, setBg]=useState()
     const [col, setCol]=useState()
     useEffect(()=>{
-        console.log("isDark:", isDark);
         if(localStorage.getItem('theme') === 'dark'){
         setBg('#333')
         setCol('#a0a0a0')
@@ -72,6 +72,9 @@ function App() {
             </Routes>
             <Routes>
                 <Route path="/userhistory" element={<UserHistory />} />
+            </Routes>
+            <Routes>
+                <Route path="/recommended" element={<Recommendations />} />
             </Routes>
         </BrowserRouter>
         <Footer />

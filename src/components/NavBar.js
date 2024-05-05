@@ -14,10 +14,12 @@ import { IoMdLogIn } from "react-icons/io";
 import { TbWritingSign } from "react-icons/tb";
 import { UserContext } from './UserContext';
 import { ThemeContext } from './ThemeContext';
+import { WiMoonAltThirdQuarter } from "react-icons/wi";
+import { MdOutlineYoutubeSearchedFor } from "react-icons/md";
 
 
 function NavBar() {
-  const {userName, setUserName}=useContext(UserContext);
+  const {userName, setUserName, setUserId, setUserEmail, setUserPassword}=useContext(UserContext);
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -31,6 +33,9 @@ function NavBar() {
         method:'POST'
       })
       setUserName(null)
+      setUserId(null)
+      setUserEmail(null)
+      setUserPassword(null)
     }//
 
     const{toggleTheme}=useContext(ThemeContext)
@@ -40,7 +45,6 @@ function NavBar() {
       localStorage.setItem('box', isChecked ? 'light' : 'dark');
       setIsChecked(!isChecked);
     }
-    console.log(isChecked)
 
     return ( 
 <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'rgb(11, 36, 71)' }}>
@@ -65,6 +69,9 @@ function NavBar() {
               <a className="nav-link" href="/writeblog"><TbWritingSign /> Write a blog</a>
             </li>
             <li className="nav-item">
+          <a className="nav-link" aria-current="page" href="/recommended"><MdOutlineYoutubeSearchedFor /> recommended</a>
+        </li>
+            <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
             </li>
           </>
@@ -78,18 +85,24 @@ function NavBar() {
               <a className="nav-link" href="/login"><TbWritingSign /> Write a blog</a>
             </li>
             <li className="nav-item">
+          <a className="nav-link" aria-current="page" href="/login"><MdOutlineYoutubeSearchedFor /> recommended</a>
+        </li>
+            <li className="nav-item">
               <a className="nav-link" href="/aboutus"><HiIdentification /> About us</a>
             </li>
           </>
         )}
       </ul>
-      {userName && (
         <ul className="navbar-nav">
-        <li className="nav-item">
+        <div className="navbar-nav d-flex align-items-center">
         <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
-  <label class="form-check-label" for="flexSwitchCheckChecked" style={{marginRight:"4px"}}>Theme</label>
+  <label class="form-check-label" for="flexSwitchCheckChecked" style={{color:"rgb(194, 200, 209)", marginRight:"4px"}}><WiMoonAltThirdQuarter /></label>
+  </div>
 </div> 
+      {userName && (
+        <>
+        <li className="nav-item">
         </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}>
@@ -101,21 +114,14 @@ function NavBar() {
               <li><a className="dropdown-item" onClick={handleLogout} href="/"><IoIosLogOut /> Log out</a></li>
             </ul>
           </li>
-        </ul>
+          </>
       )}
       {!userName && (
-        <ul className="navbar-nav">
-        <li className="nav-item">
-        <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onClick={HandleThemeToggle} checked={isChecked}/>
-  <label class="form-check-label" for="flexSwitchCheckChecked" style={{color:"white",marginRight:"4px"}}>Theme</label>
-</div> 
-        </li>
           <li className="nav-item">
             <a className="nav-link" href="/login" style={{background:'rgb(0, 166, 204)',color:'white',borderRadius:'2px'}}><IoMdLogIn /> Login</a>
           </li>
-        </ul>
       )}
+        </ul>
     </div>
   </div>
 </nav>

@@ -82,12 +82,11 @@ app.get('/profile', (req, res) => {
   
 
 
-app.post('/addblog',async(req,res)=>{
-
+  app.post('/addblog', async (req, res) => {
     try {
-        const { title, preview, content, id } = req.body;
-            await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview':preview, 'AuthorID': id });
-            res.send('add successfully');
+        const { title, preview, content, userId, tags } = req.body;
+        await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview': preview, 'AuthorID': userId, 'Tags': tags });
+        res.send('Added successfully');
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
@@ -109,6 +108,7 @@ app.get('/content/:id/:userId', async(req,res)=>{
   const id = new ObjectId(req.params.id);
   const Content=await blogCollection.findOne({'_id':id})
           if(Content){
+        const dUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $pull: { History: id }})
         const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $push: { History: id }})
         }
   res.json(Content)
@@ -130,6 +130,34 @@ app.get('/historyblogs/:id', async(req,res)=>{
   const id = new ObjectId(req.params.id);
   rus=await blogCollection.findOne({'_id':id})
   res.json(rus)
+})
+
+app.post('/recommendedblogs', async (req, res) => {
+  try {
+    const { topTags } = req.body;
+
+    let result = await blogCollection.find({ Tags: { $all: topTags } }).toArray();
+    
+    if (result.length === 0) {
+    const result = await blogCollection.find({ Tags: { $in: topTags } }).toArray();
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+app.delete('/deletehistory/:userId', async(req,res)=>{
+        const upUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.params.userId) }, { $set: { History:[] }})
+  res.json({success: true})
+})
+
+app.post('/changePassword', async(req,res)=>{
+const dUser= await userCollection.findOneAndUpdate({ '_id': new ObjectId(req.body.userId) }, { $set: { Password: req.body.password }})
+res.send('password changed successfully');
 })
 
 

@@ -10,9 +10,9 @@ function WriteBlog() {
   const [content, setContent] = useState('');
   const [loading, setLoading]=useState(false);
   const [redirect, setRedirect]=useState(false);
+  const [tags, setTags] = useState([]);
 
   const {userId}=useContext(UserContext);
-
   function handleTitleChange(e) {
     setTitle(e.target.value);
   }
@@ -25,12 +25,21 @@ function WriteBlog() {
     setContent(e.target.value);
   }
 
+  function handleTagChange(tag) {
+    const tagIndex = tags.indexOf(tag);
+    if (tagIndex === -1) {
+      setTags(prevTags => [...prevTags, tag]);
+    } else {
+      setTags(prevTags => prevTags.filter(item => item !== tag));
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
     const res=await fetch('http://localhost:8000/addblog',{
     method:'POST',
-    body: JSON.stringify({title, preview, content, userId}),
+    body: JSON.stringify({title, preview, content, userId, tags}),
     headers:{'Content-Type':'application/json'}
   })
   if(res.ok){
@@ -70,6 +79,26 @@ function WriteBlog() {
   </div>
   <div className="form-group">
   <br/>
+  <div className="mb-3 form-check-inline">
+  Tags:
+            <input type="checkbox" className="form-check-input" id="finance" checked={tags.includes('finance')} onChange={() => handleTagChange('finance')}/>
+            <label className="form-check-label" htmlFor="finance">
+            Finance
+            </label>
+            <input type="checkbox" className="form-check-input" id="lifestyle" checked={tags.includes('lifestyle')} onChange={() => handleTagChange('lifestyle')}/>
+            <label className="form-check-label" htmlFor="lifestyle">
+              Lifestyle
+            </label>
+            <input type="checkbox" className="form-check-input" id="music" checked={tags.includes('music')} onChange={() => handleTagChange('music')}/>
+            <label className="form-check-label" htmlFor="music">
+              Music
+            </label>
+            <input  type="checkbox"  className="form-check-input"  id="health"  checked={tags.includes('health')}  onChange={() => handleTagChange('health')}/>
+            <label className="form-check-label" htmlFor="health">
+              Health
+            </label>
+          </div>
+          <br/>
     <label htmlFor="content">Content</label>
     <textarea
       className="form-control"
@@ -81,7 +110,7 @@ function WriteBlog() {
   </div>
   <br/>
         {!loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Publish</button>}
-        {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Loading...</button>}
+        {loading && <button type="submit" className="btn w-100" style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled>Loading...</button>}
 </form>
         </div>
      );

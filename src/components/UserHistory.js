@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import BlogList from "./BlogList";
 import { UserContext } from "./UserContext";
+import './mainStyle.css'
 
 function UserHistory() {
     const [history,setHistory]=useState([]);
     const[historyBlogs,setHistoryBlogs]=useState([]);
     const [loading,setLoading]=useState(false)
+    const[loadingDelete,setLoadingDelete]=useState(false);
+
 
     const {userId}=useContext(UserContext);
 
@@ -47,13 +50,30 @@ function UserHistory() {
             }
           }, [history]);
 
+          async function HandleDeleteHistory(){
+            setLoadingDelete(true)
+            const res= await fetch('http://localhost:8000/deleteHistory/'+ userId,{
+              method:'DELETE',
+              headers:{'Content-Type':'application/json'}
+          })
+          if(res.ok){
+            setLoadingDelete(false)
+            window.location.reload();
+          }
+        }
+
     return ( 
         <div>
         <main>
           {loading && <h2 className="hl">Loading...</h2>}
-          <h1>History</h1>
-          <hr/>
-          <BlogList blogs={historyBlogs} />
+          <div style={{display:"flex",alignItems:"center", justifyContent:"space-between"}}>
+          {!loading && <h1>History</h1>}
+          {!loading && !loadingDelete && <button type="submit" className="btn" onClick={HandleDeleteHistory} style={{ background: 'rgb(0, 166, 204)', color:'white' }} >Delete History</button>}
+          {!loading && loadingDelete && <button type="submit" className="btn" onClick={HandleDeleteHistory} style={{ background: 'rgb(0, 166, 204)', color:'white' }} disabled>Loading...</button>}
+          </div>
+          {!loading && <hr/>}
+          {!loading && <BlogList blogs={historyBlogs} />}
+          {historyBlogs.length>0 || !loading && <h3>No history to show</h3>}
           </main>
         </div>
      );
