@@ -161,6 +161,13 @@ res.send('password changed successfully');
 })
 
 
+app.delete('/deleteBlog/:id', async(req,res)=>{
+  const dUser=await blogCollection.findOneAndDelete({'_id':new ObjectId(req.params.id)})
+  const upUser = await userCollection.updateMany({}, { $pull: { History: { $in: [new ObjectId(req.params.id)] } } });
+res.json({success: true})
+})
+
+
 var server=app.listen(8000,function(){
     var host=server.address().address;
     var port=server.address().port;
