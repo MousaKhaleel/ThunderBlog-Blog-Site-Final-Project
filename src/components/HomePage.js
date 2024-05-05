@@ -59,6 +59,7 @@ useEffect(() => {
       {loading && <h2 className="hl">Loading...</h2>}
       {blogs && <h1>Your Blogs, <Link  to="/profiledetails" style={{color:'rgb(0, 166, 204)'}}>{userName}</Link>.</h1>}
       {blogs && <hr/>}
+      {blogs.length>0 || !loading && <h3 style={{minHeight:'10vh'}}>Looks like you don't have any blogs, start writing some!</h3>}
       {blogs && <BlogList blogs={blogs} />}
       </>}
       <br/>

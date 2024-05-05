@@ -107,6 +107,7 @@ console.log(topTags)
       <main>
         {!loading && <h1>Recommended Blogs based on your history</h1>}
         {!loading && <hr/>}
+        {historyBlogs.length>0 || !loading && <h3 style={{minHeight:'60vh'}}>View some Blogs to get Recommendations</h3>}
         {recommendedBlogs && <BlogList blogs={recommendedBlogs} />}
         {loading && <h2 className="hl">Loading...</h2>}
       </main>
