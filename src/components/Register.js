@@ -41,16 +41,16 @@ if(redirect){
         <form onSubmit={handleRegister}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
-            <input name="name" type="text" value={name} onChange={e=>setName(e.target.value)} className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your name" />
+            <input name="name" type="text" value={name} onChange={e=>setName(e.target.value)} className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your name" required/>
             <br/>
             <label htmlFor="email">Email</label>
-            <input name="email" type="email" value={email} onChange={e=>setEmail(e.target.value)} className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
+            <input name="email" type="email" value={email} onChange={e=>setEmail(e.target.value)} className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required/>
             <br/>
             <label htmlFor="password">Password</label>
-            <input name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="form-control" id="password" placeholder="Must be +8 chracters" />
+            <input name="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="form-control" id="password" placeholder="Must be +8 chracters" required/>
             <br/>
             <label htmlFor="cpassword">Confirm Password</label>
-            <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Confirm password" />
+            <input name="cpassword" type="password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} className="form-control" id="cpassword" placeholder="Confirm password" required/>
           </div>
           <br />
         <p><small>Already have an account?<Link to='/login'> Let's LogIn.</Link></small></p>
