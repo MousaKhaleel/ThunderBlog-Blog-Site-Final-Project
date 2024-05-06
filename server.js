@@ -93,9 +93,12 @@ app.get('/profile', (req, res) => {
     }
 });
 
-app.get('/allblogs',async(req,res)=>{
-    const allBlogs= await blogCollection.find({}).toArray()
-    res.send(allBlogs)
+app.get('/allblogs', async (req, res) => {
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+  const skipBlogs = (page - 1) * limit;
+    const allBlogs = await blogCollection.find({}).skip(skipBlogs).limit(limit).toArray();
+    res.send(allBlogs);
 })
 
 app.get('/content/:id', async(req,res)=>{

@@ -10,6 +10,8 @@ import { SiFlyway } from "react-icons/si";
 import { GiStrong } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import { UserContext } from "./UserContext";
+import { GrFormPrevious } from "react-icons/gr";
+import { MdNavigateNext } from "react-icons/md";
 
 function HomePage() {
   const[blogs,setBlogs]=useState('');
@@ -34,13 +36,28 @@ if (userId) {
 }
 }, [userId]);
 
+const [page, setPage] = useState(1);
+const [hasNextPage, setHasNextPage] = useState(true);
+
+
 useEffect(() => {
-  setAllLoading(true)
-  fetch("http://localhost:8000/allblogs")
-    .then((res) => res.json())
-    .then((data) => {setAllBlogs(data); setAllLoading(false)})
-    .catch((error) => console.error(error));
-}, []);
+    fetch(`http://localhost:8000/allblogs?page=${page}&limit=5`)
+      .then((res) => res.json())
+      .then((data) => {setAllBlogs(data); setAllLoading(false); setHasNextPage(data.length === 5);})
+      .catch((error) => console.error(error));
+  }, [page]);
+
+  const handleNextPage = () => {
+    if (hasNextPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
     return ( 
       <div>
@@ -52,6 +69,10 @@ useEffect(() => {
        {allLoading && <h2 className="hl">Loading...</h2>}
        {blogs && <hr/>}
       {allBlogs && <BlogList blogs={allBlogs}/>}
+      <div className="pagination">
+          {page === 1? <button onClick={handlePreviousPage} style={{ background: 'rgba(0, 167, 204, 0.684)' }} disabled><GrFormPrevious /></button> : <button onClick={handlePreviousPage}><GrFormPrevious /></button>}
+          {hasNextPage? <button onClick={handleNextPage}><MdNavigateNext /></button> : <button onClick={handleNextPage} style={{ background: 'rgba(0, 167, 204, 0.684)' }} disabled><MdNavigateNext /></button>}
+        </div>
       </main>
       </div>
             </> }
