@@ -9,7 +9,7 @@ const userCollection= myDb.collection('User-Accounts')
 const blogCollection= myDb.collection('Blogs')
 
 const express= require('express');
-var app=express();
+const app=express();
 const cors = require("cors");
 // const path = require('path');
 const jwt=require('jsonwebtoken')
@@ -166,5 +166,6 @@ var server=app.listen(8000,function(){
     var port=server.address().port;
 });
 
-// module.export({userCollection, blogCollection});
-export {userCollection, blogCollection}
+module.exports =  app ;
+exports.userCollection = userCollection;
+exports.blogCollection = blogCollection;

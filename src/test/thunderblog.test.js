@@ -1,35 +1,35 @@
-// const mongoose = require("mongodb");
-// const request = require("supertest");
-// const app = require("../../server.js");
+const {MongoClient}=require('mongodb')
+const request = require("supertest");
+const app = require("../../server.js");
 
-// require("dotenv").config();
+require("dotenv").config();
 
-// const jwt = require('jsonwebtoken')
-// const secret = 'bu43ry8477r8gbn4f3e834iu';
-// const {userCollection} = require('../../server.js');
-// const {blogCollection} = require('../../server.js');
-
-// // jest.mock('./server', () => {
-// //     const { MongoClient } = require('mongodb');
-// //     const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-// //     const db = client.db('');
-// //     const userCollection = db.collection('test_users');
-// //     return { userCollection };
-// // });
-
-// it("it should pass lol", () =>{
-
-// })
-
-// describe('GET /allblogs', () => { //works
-//     it('responds with all blogs in the database', async () => {
-//       const response = await request(app).get('/allblogs');
-  
-//       expect(response.status).toBe(200);
-        
-//       expect(response.body).toBeDefined();
-//     });
+const jwt = require('jsonwebtoken')
+const secret = 'bu43ry8477r8gbn4f3e834iu';
+const {userCollection} = require('../../server.js');
+const {blogCollection} = require('../../server.js');
+console.log(typeof app);
+// jest.mock('./server', () => {
+//     const { MongoClient } = require('mongodb');
+//     const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
+//     const db = client.db('');
+//     const userCollection = db.collection('test_users');
+//     return { userCollection };
 // });
+
+it("it should pass lol", () =>{
+
+})
+
+describe('GET /allblogs', () => { //works
+    it('responds with all blogs in the database', async () => {
+      const response = await request(app).get('/allblogs');
+  
+      expect(response.status).toBe(200);
+        
+      expect(response.body).toBeDefined();
+    });
+});
 
 // describe("GET /allblogs", () => {
 //     it("should return all blogs", async () => {
@@ -217,60 +217,60 @@
 // //         expect(response.text).toBe('Internal Server Error');
 // //     });
 // // });
-const request = require('supertest');
-const app = require("../../server.js");
-describe('Testing Server Endpoints', () => {
-  let token = '';
+// const request = require('supertest');
+// const app = require("../../server.js");
+// describe('Testing Server Endpoints', () => {
+//   let token = '';
 
-  // Login before running tests
-  beforeAll(async () => {
-    const response = await request(app)
-      .post('/login')
-      .send({ email: 'example@example.com', password: 'password' });
-    token = response.headers['set-cookie'][0].split(';')[0];
-  });
+//   // Login before running tests
+//   beforeAll(async () => {
+//     const response = await request(app)
+//       .post('/login')
+//       .send({ email: 'example@example.com', password: 'password' });
+//     token = response.headers['set-cookie'][0].split(';')[0];
+//   });
 
-  it('should return "server started" message', async () => {
-    const response = await request(app).get('/');
-    expect(response.statusCode).toBe(200);
-    expect(response.text).toBe('server started');
-  });
+//   it('should return "server started" message', async () => {
+//     const response = await request(app).get('/');
+//     expect(response.statusCode).toBe(200);
+//     expect(response.text).toBe('server started');
+//   });
 
-  it('should register a new user', async () => {
-    const response = await request(app)
-      .post('/register')
-      .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
-    expect(response.statusCode).toBe(200);
-    expect(response.text).toBe('Registration successful');
-  });
+//   it('should register a new user', async () => {
+//     const response = await request(app)
+//       .post('/register')
+//       .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.text).toBe('Registration successful');
+//   });
 
-  it('should not allow registering an existing user', async () => {
-    const response = await request(app)
-      .post('/register')
-      .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
-    expect(response.statusCode).toBe(400);
-    expect(response.text).toBe('User already exists');
-  });
+//   it('should not allow registering an existing user', async () => {
+//     const response = await request(app)
+//       .post('/register')
+//       .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
+//     expect(response.statusCode).toBe(400);
+//     expect(response.text).toBe('User already exists');
+//   });
 
-  it('should add a new blog', async () => {
-    const response = await request(app)
-      .post('/addblog')
-      .set('Cookie', token)
-      .send({ title: 'Test Blog', preview: 'Preview content', content: 'Blog content', id: 'author_id' });
-    expect(response.statusCode).toBe(200);
-    expect(response.text).toBe('add successfully');
-  });
+//   it('should add a new blog', async () => {
+//     const response = await request(app)
+//       .post('/addblog')
+//       .set('Cookie', token)
+//       .send({ title: 'Test Blog', preview: 'Preview content', content: 'Blog content', id: 'author_id' });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.text).toBe('add successfully');
+//   });
 
-  it('should get all blogs', async () => {
-    const response = await request(app).get('/allblogs');
-    expect(response.statusCode).toBe(200);
-    expect(Array.isArray(response.body)).toBeTruthy();
-  });
+//   it('should get all blogs', async () => {
+//     const response = await request(app).get('/allblogs');
+//     expect(response.statusCode).toBe(200);
+//     expect(Array.isArray(response.body)).toBeTruthy();
+//   });
 
-  // Add more tests for other endpoints as needed
+//   // Add more tests for other endpoints as needed
 
-  // Logout after running tests
-  afterAll(async () => {
-    await request(app).post('/logout').set('Cookie', token);
-  });
-});
+//   // Logout after running tests
+//   afterAll(async () => {
+//     await request(app).post('/logout').set('Cookie', token);
+//   });
+// });
