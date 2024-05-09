@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 const {MongoClient}=require('mongodb')
-var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 // var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
-const client= new MongoClient(connection)
+const client= new MongoClient(process.env.MOUSA_MONGODB_CONNECTION_STRING)
 
 const myDb= client.db('Blog-Website')
 
@@ -20,7 +22,8 @@ app.use(cp())
 
 const { ObjectId } = require('mongodb');
 
-const secret='bu43ry8477r8gbn4f3e834iu';
+// bu43ry8477r8gbn4f3e834iu
+const secret=process.env.JWT_SECRET;
 // var bodyParse= require('body-parser')
 
 // var urlEncoded= bodyParse.urlencoded({extended:false})
@@ -171,7 +174,7 @@ res.json({success: true})
 })
 
 
-var server=app.listen(8000,function(){
+var server=app.listen(process.env.PORT || 8000,function(){
     var host=server.address().address;
     var port=server.address().port;
 });
