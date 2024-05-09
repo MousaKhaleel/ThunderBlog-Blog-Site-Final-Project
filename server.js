@@ -173,8 +173,8 @@ app.delete('/deleteBlog/:id', async(req,res)=>{
 res.json({success: true})
 })
 
-
-var server=app.listen(process.env.PORT || 8000,function(){
+// process.env.PORT || 
+var server=app.listen(8000,function(){
     var host=server.address().address;
     var port=server.address().port;
 });
