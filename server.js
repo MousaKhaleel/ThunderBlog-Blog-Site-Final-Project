@@ -1,6 +1,6 @@
 const {MongoClient}=require('mongodb')
-var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-// var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
+// var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+ var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
 const client= new MongoClient(connection)
 
 const myDb= client.db('Blog-Website')
@@ -18,12 +18,18 @@ app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json())//instade of body parser
 app.use(cp())
 
+module.exports = { app, userCollection, blogCollection };
+
 const { ObjectId } = require('mongodb');
 
 const secret='bu43ry8477r8gbn4f3e834iu';
 // var bodyParse= require('body-parser')
 
 // var urlEncoded= bodyParse.urlencoded({extended:false})
+
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
 
 app.get('/',function(req,res)
 {
@@ -35,9 +41,12 @@ app.get('/',function(req,res)
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const findAuthor = await userCollection.findOne({ 'Email': email, 'Password': password });
+    module.exports = {
+      findAuthor: findAuthor
+    };
     if (findAuthor) {
       const token = jwt.sign({ name: findAuthor.Name, id: findAuthor._id, email, password }, secret);
-      res.cookie('token', token, { httpOnly: true }).json('ok');
+      res.cookie('token', token, { httpOnly: true }).json({token});
     } else {
       res.status(400).json('Wrong info try again');
     }
@@ -49,15 +58,22 @@ app.post('/register',async(req,res)=>{
     try {
         const { name, email, password } = req.body;
         const existingUser = await userCollection.findOne({ 'Email': email });
+        module.exports = {
+          existingUser: existingUser
+        };
         if (!existingUser) {
             await userCollection.insertOne({ 'Name': name, 'Email': email, 'Password': password,'History':[] });
-            res.send('Registration successful');
+            res.status(200).send("Registration successful");
+            // res.status(200).json({ message: 'Registration successful' });
+
         } else {
             res.status(400).send('User already exists');
+            // res.status(400).json({ message: 'User already exists' });
+
         }
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Internal Server Error');//json({ message: 'Internal Server Error' });
     }
 });
 
@@ -166,6 +182,13 @@ var server=app.listen(8000,function(){
     var port=server.address().port;
 });
 
-module.exports =  app ;
-exports.userCollection = userCollection;
-exports.blogCollection = blogCollection;
+// module.exports =  app ;
+// exports.myDb = myDb;
+// exports.client = client;
+// exports.connection = connection;
+// export {userCollection}
+// console.log(typeof userCollection)
+// // exports.userCollection = userCollection;
+// exports.blogCollection = blogCollection;
+
+

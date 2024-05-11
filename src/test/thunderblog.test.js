@@ -1,21 +1,26 @@
 const {MongoClient}=require('mongodb')
 const request = require("supertest");
-const app = require("../../server.js");
+// const myDb = require('../../server.js'); 
+// const client = require('../../server.js'); 
+// const connection = require('../../server.js');
+// const findAuthor = require('../../server.js');
+// const existingUser = require('../../server.js');
 
-require("dotenv").config();
+
+require("dotenv").config()
 
 const jwt = require('jsonwebtoken')
 const secret = 'bu43ry8477r8gbn4f3e834iu';
-const {userCollection} = require('../../server.js');
-const {blogCollection} = require('../../server.js');
+
+const { app, userCollection, blogCollection } = require("../../server.js");
+const { Cookie } = require('express-session');
+//  const {userCollection} = require('../../server.js');
+//  userCollection = Object; 
+// const {blogCollection} = require('../../server.js');
+
 console.log(typeof app);
-// jest.mock('./server', () => {
-//     const { MongoClient } = require('mongodb');
-//     const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-//     const db = client.db('');
-//     const userCollection = db.collection('test_users');
-//     return { userCollection };
-// });
+// console.log(typeof findAuthor);
+console.log(typeof userCollection);
 
 it("it should pass lol", () =>{
 
@@ -31,246 +36,227 @@ describe('GET /allblogs', () => { //works
     });
 });
 
-// describe("GET /allblogs", () => {
-//     it("should return all blogs", async () => {
-//         return request(app)
-//             .get("/allblogs")
-//             .expect('Content-Type', /json/)
-//             .expect(200)
-//             .then((res) => {
-//                 expect(res.statusCode).toBe(200);
-//             })
-//     });
-// });
+describe("GET /allblogs", () => { //also works :)
+    it("should return all blogs", async () => {
+        return request(app)
+            .get("/allblogs")
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+            })
+    });
+});
+// const mockFindAuthor = findAuthor({
+//   createUser,
+//   getUser
+// })
 
-// // describe('POST /login', () => {
-// //     it('should log in the user with valid credentials', async () => {
-// //       // Mock data for the request body
-// //       const validCredentials = {
-// //         email: 'example@example.com',
-// //         password: 'password123'
-// //       };
-// //       const response = await request(app)
-// //       .post('/login')
-// //       .send(validCredentials);
+describe("Login Endpoint", () => {
+  it("should log in user with valid credentials", async () => {
+    // Mock user data
+    const userData = { email: "test@example.com", password: "password" };
 
-// //     // Assertions
-// //     expect(response.status).toBe(200);
-// //     expect(response.headers['set-cookie']).toBeDefined(); // Check if token cookie is set
-// //     expect(response.body).toBe('ok'); // Assuming your endpoint returns 'ok' on successful login
-// //   });
+    // Insert mock user data into the database
+    await userCollection.insertOne(userData);
 
-// //   it('should return error for invalid credentials', async () => {
-// //     // Mock data for the request body with invalid credentials
-// //     const invalidCredentials = {
-// //       email: 'example@example.com',
-// //       password: 'wrongpassword'
-// //     };
+    // Send a login request with mock user credentials
+    const response = await request(app)
+      .post("/login")
+      .send(userData)
+      .expect("Content-Type", /json/)
+      .expect(200);
 
-// //     // Send a POST request to the /login endpoint with invalid credentials
-// //     const response = await request(app)
-// //       .post('/login')
-// //       .send(invalidCredentials);
+    // Assert that the response contains a token
+    expect(response.body).toHaveProperty("token");
+  });
 
-// //     // Assertions
-// //     expect(response.status).toBe(400);
-// //     expect(response.body).toBe('Wrong info try again'); // Assuming your endpoint returns this message for invalid credentials
-// //   });
-// // });
-// // describe('POST /login', () => {
+  it("should return 400 for invalid credentials", async () => {
+    // Send a login request with invalid credentials
+    const response = await request(app)
+      .post("/login")
+      .send({ email: "invalid@example.com", password: "invalid" })
+      .expect("Content-Type", /json/)
+      .expect(400);
 
-// //     it('should log in the user with valid credentials', async () => {
-  
-// //     //   const validCredentials = {
-// //     //     email: 'example@gmail.com',
-// //     //     password: '1234'
-// //     //   };
-  
-// //       // Send a POST request to the /login endpoint with valid credentials
-// //       const response = await request(app)
-// //         .post('/login')
-// //         .send({
-// //             email: "test@test.com",
-// //             password: "1234"
-// //         });
-  
-// //       // Assertions
-// //       expect(response.statusCode).toBe(400);
-// //       //expect(response.headers['set-cookie']).toBeDefined(); // Check if token cookie is set
-// //       expect(response.body).toBe('Wrong info try again'); // Assuming your endpoint returns 'ok' on successful login
-// //     });
-  
-// //     it('should return error for invalid credentials', async () => {
-// //       // Mock data for the request body with invalid credentials
-// //       const invalidCredentials = {
-// //         email: 'example@example.com',
-// //         password: 'wrongpassword'
-// //       };
-  
-// //       // Send a POST request to the /login endpoint with invalid credentials
-// //       const response = await request(app)
-// //         .post('/login')
-// //         .send(invalidCredentials);
-  
-// //       // Assertions
-// //       expect(response.status).toBe(400);
-// //       expect(response.body).toBe('Wrong info try again'); // Assuming your endpoint returns this message for invalid credentials
-// //     });
-// //   });
-// // describe('POST /login', () => {
-// //     beforeEach(async () => {
-// //       await userCollection // Clear the user collection before each test
-// //     });
-  
-// //     it('should return a token on successful login', async () => {
-// //       const user = { email: 'test@example.com', password: 'password' };
-// //       await userCollection.insertOne(user);
-  
-// //       const res = await request(app)
-// //        .post('/login')
-// //        .send({ email: user.email, password: user.password });
-  
-// //       expect(res.status).toBe(200);
-// //       expect(res.body).toEqual({ message: 'Logged in successfully' });
-// //       expect(res.headers['set-cookie'][0]).toContain('token=');
-// //     });
-  
-// //     it('should return an error on invalid email or password', async () => {
-// //       const res = await request(app)
-// //        .post('/login')
-// //        .send({ email: 'invalid@example.com', password: 'wrongpassword' });
-  
-// //       expect(res.status).toBe(400);
-// //       //expect(res.body).toEqual({ error: 'Invalid email or password' });
-// //     });
-  
-//     // it('should return an error on internal server error', async () => {
-//     //   const res = await request(app)
-//     //    .post('/login')
-//     //    .send({ email: 'test@example.com', password: 'password' });
-  
-//     //   // Simulate an internal server error
-//     //   jest.spyOn(userCollection, 'findOne').mockImplementation(() => {
-//     //     throw new Error('Internal Server Error');
-//     //   });
-  
-//     //   expect(res.status).toBe(500);
-//     //   expect(res.body).toEqual({ error: 'Internal Server Error' });
-//     // });
-// //   });
+    // Assert that the response contains an error message
+    expect(response.body).toEqual("Wrong info try again");
+  });
+});
 
-// //   describe('POST /register', () => {
-// //     it('should register a new user with valid credentials', async () => {
-// //         // Mock data for the request body
-// //         const validCredentials = {
-// //             name: 'John Doe',
-// //             email: 'johndoe@example.com',
-// //             password: 'password123'
-// //         };
+// describe('POST /register', () => {
+//   it('should create a new user and return success message', async () => {
+//     const newUser = {
+//       name: 'John',
+//       email: 'johfn.doe@example.com',
+//       password: 'password123'
+//     };
 
-// //         // Send a POST request to the /register endpoint with valid credentials
-// //         const response = await request(app)
-// //             .post('/register')
-// //             .send(validCredentials);
-
-// //         // Assertions
-// //         expect(response.status).toBe(200);
-// //         expect(response.text).toBe('Registration successful');
-// //     });
-
-// //     it('should return error for existing user', async () => {
-// //         // Mock data for the request body with existing user's email
-// //         const existingUserCredentials = {
-// //             name: 'Jane Doe',
-// //             email: 'janedoe@example.com',
-// //             password: 'password123'
-// //         };
-
-// //         // Send a POST request to the /register endpoint with existing user's email
-// //         const response = await request(app)
-// //             .post('/register')
-// //             .send(existingUserCredentials);
-
-// //         // Assertions
-// //         expect(response.status).toBe(400);
-// //         expect(response.text).toBe('User already exists');
-// //     });
-
-// //     it('should return internal server error for unexpected error', async () => {
-// //         // Mock data for the request body
-// //         const invalidCredentials = {
-// //             name: 'John Doe',
-// //             email: 'johndoe@example.com',
-// //             password: 'password123'
-// //         };
-
-// //         // Mocking a function that will throw an error
-// //         jest.spyOn(app.locals.userCollection, 'findOne').mockRejectedValue(new Error('Unexpected error'));
-
-// //         // Send a POST request to the /register endpoint with invalid credentials
-// //         const response = await request(app)
-// //             .post('/register')
-// //             .send(invalidCredentials);
-
-// //         // Assertions
-// //         expect(response.status).toBe(500);
-// //         expect(response.text).toBe('Internal Server Error');
-// //     });
-// // });
-// const request = require('supertest');
-// const app = require("../../server.js");
-// describe('Testing Server Endpoints', () => {
-//   let token = '';
-
-//   // Login before running tests
-//   beforeAll(async () => {
-//     const response = await request(app)
-//       .post('/login')
-//       .send({ email: 'example@example.com', password: 'password' });
-//     token = response.headers['set-cookie'][0].split(';')[0];
-//   });
-
-//   it('should return "server started" message', async () => {
-//     const response = await request(app).get('/');
-//     expect(response.statusCode).toBe(200);
-//     expect(response.text).toBe('server started');
-//   });
-
-//   it('should register a new user', async () => {
-//     const response = await request(app)
+//     const res = await request(app)
 //       .post('/register')
-//       .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
-//     expect(response.statusCode).toBe(200);
-//     expect(response.text).toBe('Registration successful');
+//       .send(newUser);
+
+//     expect(res.status).toBe(200);
+//     expect(res.text).toBe('Registration successful');
+
+//     // Verify that the user was added to the database
+//     const user = await userCollection.findOne({ 'Email': newUser.email });
+//     expect(user).not.toBeNull();
+//     expect(user.Name).toBe(newUser.name);
+//     expect(user.Email).toBe(newUser.email);
+//     expect(user.Password).toBe(newUser.password);
 //   });
 
-//   it('should not allow registering an existing user', async () => {
-//     const response = await request(app)
+//   it('should return error if user already exists', async () => {
+//     const existingUser = {
+//       name: 'Jane Doe',
+//       email: 'jane.doe@example.com',
+//       password: 'password456'
+//     };
+
+//     // Add the existing user to the database
+//     await userCollection.insertOne({ 'Name': existingUser.name, 'Email': existingUser.email, 'Password': existingUser.password,'History':[] });
+
+//     const res = await request(app)
 //       .post('/register')
-//       .send({ name: 'Test User', email: 'test@example.com', password: 'testpassword' });
-//     expect(response.statusCode).toBe(400);
-//     expect(response.text).toBe('User already exists');
+//       .send(existingUser);
+
+//     expect(res.status).toBe(400);
+//     expect(res.text).toBe('User already exists');
 //   });
 
-//   it('should add a new blog', async () => {
-//     const response = await request(app)
-//       .post('/addblog')
-//       .set('Cookie', token)
-//       .send({ title: 'Test Blog', preview: 'Preview content', content: 'Blog content', id: 'author_id' });
-//     expect(response.statusCode).toBe(200);
-//     expect(response.text).toBe('add successfully');
-//   });
+//   it('should return error if required fields are missing', async () => {
+//     const res = await request(app)
+//       .post('/register')
+//       .send({});
 
-//   it('should get all blogs', async () => {
-//     const response = await request(app).get('/allblogs');
-//     expect(response.statusCode).toBe(200);
-//     expect(Array.isArray(response.body)).toBeTruthy();
-//   });
+//     expect(res.status).toBe(400);
+//     expect(res.text).toBe('Name is required');
 
-//   // Add more tests for other endpoints as needed
+//     const res2 = await request(app)
+//       .post('/register')
+//       .send({ name: 'John Doe' });
 
-//   // Logout after running tests
-//   afterAll(async () => {
-//     await request(app).post('/logout').set('Cookie', token);
+//     expect(res2.status).toBe(400);
+//     expect(res2.text).toBe('Email is required');
+
+//     const res3 = await request(app)
+//       .post('/register')
+//       .send({ name: 'John Doe', email: 'john.doe@example.com' });
+
+//     expect(res3.status).toBe(400);
+//     expect(res3.text).toBe('Password is required');
 //   });
 // });
+        ////////////////////////////////
+// describe("Register Endpoint", () => {
+//   it("should register a new user", async () => {
+//     // Mock user data
+//     const userData = { name: "TestUser", email: "test@example.com", password: "password" };
+
+//     // Send a register request with mock user data
+//     const response = await request(app)
+//       .post("/register")
+//       .send(userData)
+//       .expect("Content-Type", /text/) // Adjusted expectation to JSON
+//       .expect(400);
+
+//     // Assert that the response contains a success message
+//     expect(response.body).toEqual("Registration successful" ); // Adjusted expectation for message from JSON response
+//   });
+
+//   it("should return 400 for existing user", async () => {
+//     // Mock user data
+//     const existingUser = { name: "ExistingUser", email: "existing@example.com", password: "password" };
+
+//     // Insert a user with the same email as existingUser into the database
+//     await userCollection.insertOne(existingUser);
+
+//     // Send a register request with existing user's email
+//     const response = await request(app)
+//       .post("/register")
+//       .send(existingUser)
+//       .expect("Content-Type", /text/) // Adjusted expectation to JSON
+//       .expect(400);
+
+//     // Assert that the response contains an error message
+//     expect(response.body).toEqual( "User already exists" ); // Adjusted expectation for message from JSON response
+//   });
+// });
+
+describe("Profile Endpoint", () => {
+  it("should return user profile when authorized", async () => {
+    
+    const userData = { name: "TestUser", email: "test@example.com", password: "password" };
+
+   
+    const token = jwt.sign(userData, secret);
+
+    
+    const response = await request(app)
+      .get("/profile")
+      .set("Cookie", `token=${token}`)
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+   
+    expect(response.body.name).toEqual(userData.name);
+    expect(response.body.email).toEqual(userData.email);
+    
+  });
+});
+describe("Logout Endpoint", () => {
+  it("should clear the token cookie and respond with 'ok'", async () => {
+   
+    const response = await request(app)
+      .post("/logout")
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(response.body).toEqual("ok");
+
+    expect(response.headers["set-cookie"]).toContain("token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+  });
+});
+describe("Add Blog Endpoint", () => {
+  it("should add a new blog post successfully", async () => {
+   
+    const blogData = { 
+      title: "Test Blog Post", 
+      preview: "This is a preview of the test blog post.", 
+      content: "This is the content of the test blog post.", 
+      userId: "user123", 
+      tags: ["test", "blog", "example"] 
+    };
+
+    const response = await request(app)
+      .post("/addblog")
+      .send(blogData)
+      .expect("Content-Type", /text/)
+      .expect(200);
+
+    expect(response.text).toEqual("Added successfully");
+  });
+
+  it("should return internal server error when an error occurs", async () => {
+  
+    const invalidBlogData = { 
+      title: "Test Blog Post", 
+      preview: "This is a preview of the test blog post.", 
+      content: "This is the content of the test blog post.", 
+      userId: "user123", 
+      tags: ["test", "blog", "example"] 
+    };
+
+    jest.spyOn(blogCollection, "insertOne").mockImplementationOnce(() => { throw new Error("Database error"); });
+
+    const response = await request(app)
+      .post("/addblog")
+      .send(invalidBlogData)
+      .expect("Content-Type", /text/)
+      .expect(500);
+
+    expect(response.text).toEqual("Internal Server Error");
+  });
+});
+
