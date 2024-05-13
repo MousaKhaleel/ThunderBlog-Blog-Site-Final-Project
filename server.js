@@ -1,19 +1,19 @@
-const {MongoClient}=require('mongodb')
+const {MongoClient} = require('mongodb')
 // var connection="mongodb+srv://user1:qwe12345678@cluster0.1ogr7io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
- var connection="mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
-const client= new MongoClient(connection)
+ var connection = "mongodb+srv://yazeedfayoumi:kcuHGtF30ENDME6p@atlascluster.kgxlft7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
+const client = new MongoClient(connection)
 
-const myDb= client.db('Blog-Website')
+const myDb = client.db('Blog-Website')
 
-const userCollection= myDb.collection('User-Accounts')
-const blogCollection= myDb.collection('Blogs')
+const userCollection = myDb.collection('User-Accounts')
+const blogCollection = myDb.collection('Blogs')
 
-const express= require('express');
-const app=express();
+const express = require('express');
+const app = express();
 const cors = require("cors");
 // const path = require('path');
-const jwt=require('jsonwebtoken')
-const cp=require('cookie-parser')
+const jwt = require('jsonwebtoken')
+const cp = require('cookie-parser')
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json())//instade of body parser
 app.use(cp())
@@ -22,7 +22,7 @@ module.exports = { app, userCollection, blogCollection };
 
 const { ObjectId } = require('mongodb');
 
-const secret='bu43ry8477r8gbn4f3e834iu';
+const secret = 'bu43ry8477r8gbn4f3e834iu';
 // var bodyParse= require('body-parser')
 
 // var urlEncoded= bodyParse.urlencoded({extended:false})
@@ -58,9 +58,7 @@ app.post('/register',async(req,res)=>{
     try {
         const { name, email, password } = req.body;
         const existingUser = await userCollection.findOne({ 'Email': email });
-        module.exports = {
-          existingUser: existingUser
-        };
+        
         if (!existingUser) {
             await userCollection.insertOne({ 'Name': name, 'Email': email, 'Password': password,'History':[] });
             res.status(200).send("Registration successful");
@@ -100,15 +98,23 @@ app.get('/profile', (req, res) => {
 
   app.post('/addblog', async (req, res) => {
     try {
-        const { title, preview, content, userId, tags } = req.body;
-        await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview': preview, 'AuthorID': userId, 'Tags': tags });
-        res.send('Added successfully');
+      const { title, preview, content, userId, tags } = req.body;
+      
+      
+      if (!title || !preview || !content || !userId || !tags) {
+        return res.status(400).send('Missing required fields');
+      }
+  
+      
+      await blogCollection.insertOne({ 'Title': title, 'Content': content, 'Preview': preview, 'AuthorID': userId, 'Tags': tags });
+      
+      res.send('Added successfully');
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
     }
-});
-
+  });
+  
 app.get('/allblogs',async(req,res)=>{
     const allBlogs= await blogCollection.find({}).toArray()
     res.send(allBlogs)
@@ -181,14 +187,3 @@ var server=app.listen(8000,function(){
     var host=server.address().address;
     var port=server.address().port;
 });
-
-// module.exports =  app ;
-// exports.myDb = myDb;
-// exports.client = client;
-// exports.connection = connection;
-// export {userCollection}
-// console.log(typeof userCollection)
-// // exports.userCollection = userCollection;
-// exports.blogCollection = blogCollection;
-
-
