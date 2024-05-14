@@ -19,7 +19,7 @@ function UserHistory() {
           })
             .then(res => {
               res.json().then(hist => {
-                setHistory(hist);
+                setHistory(hist || []);
               });
             });
         }
@@ -73,7 +73,7 @@ function UserHistory() {
           </div>
           {!loading && <hr/>}
           {!loading && <BlogList blogs={historyBlogs} />}
-          {historyBlogs.length>0 || !loading && <h3>No history to show</h3>}
+          {historyBlogs.length>0 || !loading && <h3 style={{minHeight:"20vh"}}>No history to show</h3>}
           </main>
         </div>
      );
