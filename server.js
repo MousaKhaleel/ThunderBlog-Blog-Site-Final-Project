@@ -62,12 +62,10 @@ app.post('/register',async(req,res)=>{
         if (!existingUser) {
             await userCollection.insertOne({ 'Name': name, 'Email': email, 'Password': password,'History':[] });
             res.status(200).send("Registration successful");
-            // res.status(200).json({ message: 'Registration successful' });
-
+           
         } else {
             res.status(400).send('User already exists');
-            // res.status(400).json({ message: 'User already exists' });
-
+    
         }
     } catch (error) {
         console.error('Error registering user:', error);
