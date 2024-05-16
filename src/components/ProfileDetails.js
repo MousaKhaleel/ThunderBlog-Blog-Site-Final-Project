@@ -10,7 +10,7 @@ function ProfileDetails() {
     const {userId, userName, setUserName, userEmail, userPassword}=useContext(UserContext);
 
     function handleLogout() {
-      fetch('http://localhost:8000/logout',{
+      fetch(process.env.REACT_APP_API_URL+'/logout',{
         credentials:'include',
         method:'POST'
       })
@@ -21,7 +21,7 @@ function ProfileDetails() {
         e.preventDefault()
         setLoading(true)
         if(password===confirmPassword){
-        const res=await fetch('http://localhost:8000/changePassword',{
+        const res=await fetch(process.env.REACT_APP_API_URL+'/changePassword',{
         method:'POST',
         body: JSON.stringify({userId, password}),
         headers:{'Content-Type':'application/json'}

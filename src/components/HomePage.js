@@ -24,7 +24,7 @@ function HomePage() {
 useEffect(() => {
 if (userId) {
   setLoading(true);
-  fetch('http://localhost:8000/userblogs/' + userId, {
+  fetch(process.env.REACT_APP_API_URL+'/userblogs/' + userId, {
     credentials: 'include'
   })
     .then(res => {
@@ -41,7 +41,7 @@ const [hasNextPage, setHasNextPage] = useState(true);
 
 
 useEffect(() => {
-    fetch(`http://localhost:8000/allblogs?page=${page}&limit=5`)
+    fetch(`${process.env.REACT_APP_API_URL}/allblogs?page=${page}&limit=5`)
       .then((res) => res.json())
       .then((data) => {setAllBlogs(data); setAllLoading(false); setHasNextPage(data.length === 5);})
       .catch((error) => console.error(error));

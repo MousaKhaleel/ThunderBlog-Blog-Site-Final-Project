@@ -14,7 +14,7 @@ function UserHistory() {
 
       useEffect(() => {
         if (userId) {
-          fetch('http://localhost:8000/history/' + userId, {
+          fetch(process.env.REACT_APP_API_URL+'/history/' + userId, {
             credentials: 'include'
           })
             .then(res => {
@@ -31,7 +31,7 @@ function UserHistory() {
               for (let i = 0; i < history.length; i++) {
                 try {
                   const res = await fetch(
-                    "http://localhost:8000/historyblogs/" + history[i],
+                    process.env.REACT_APP_API_URL+"/historyblogs/" + history[i],
                     { credentials: "include" }
                   );
                   const blog = await res.json();
@@ -52,7 +52,7 @@ function UserHistory() {
 
           async function HandleDeleteHistory(){
             setLoadingDelete(true)
-            const res= await fetch('http://localhost:8000/deleteHistory/'+ userId,{
+            const res= await fetch(process.env.REACT_APP_API_URL+'/deleteHistory/'+ userId,{
               method:'DELETE',
               headers:{'Content-Type':'application/json'}
           })
