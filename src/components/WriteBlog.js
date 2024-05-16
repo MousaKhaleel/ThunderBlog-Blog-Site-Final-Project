@@ -37,7 +37,7 @@ function WriteBlog() {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    const res=await fetch('http://localhost:8000/addblog',{
+    const res=await fetch(process.env.REACT_APP_API_URL+'/addblog',{
     method:'POST',
     body: JSON.stringify({title, preview, content, userId, tags}),
     headers:{'Content-Type':'application/json'}

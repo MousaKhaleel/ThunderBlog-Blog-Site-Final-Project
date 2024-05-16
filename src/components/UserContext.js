@@ -12,7 +12,7 @@ const [userPassword, setUserPassword]=useState('');
 useEffect(()=>{
     try {
     //   setLoading(true)
-      fetch('http://localhost:8000/profile',{
+      fetch(process.env.REACT_APP_API_URL+'/profile',{
         credentials:'include',
         method:'GET'
       }).then(res=>{

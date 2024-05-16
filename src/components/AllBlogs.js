@@ -12,7 +12,7 @@ function AllBlogs() {
   
 
   useEffect(() => {
-      fetch(`http://localhost:8000/allblogs?page=${page}&limit=5`)
+      fetch(`${process.env.REACT_APP_API_URL}/allblogs?page=${page}&limit=5`)
         .then((res) => res.json())
         .then((data) => {setBlogs(data); setLoading(false); setHasNextPage(data.length === 5);})
         .catch((error) => console.error(error));
@@ -39,7 +39,7 @@ function AllBlogs() {
       {blogs && <BlogList blogs={blogs}/>}
       <div className="pagination">
           {page === 1? <button onClick={handlePreviousPage} style={{ background: 'rgba(0, 167, 204, 0.684)' }} disabled><GrFormPrevious /></button> : <button onClick={handlePreviousPage}><GrFormPrevious /></button>}
-          {hasNextPage? <button onClick={handleNextPage}><MdNavigateNext /></button> : <button onClick={handleNextPage} style={{ background: 'rgba(0, 167, 204, 0.684)' }} disabled><GrFormPrevious /></button>}
+          {hasNextPage? <button onClick={handleNextPage}><MdNavigateNext /></button> : <button onClick={handleNextPage} style={{ background: 'rgba(0, 167, 204, 0.684)' }} disabled><MdNavigateNext /></button>}
         </div>
       </main>
       </div>
