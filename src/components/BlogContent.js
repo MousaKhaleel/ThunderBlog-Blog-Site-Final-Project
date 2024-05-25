@@ -16,7 +16,7 @@ function BlogContent() {
     useEffect(()=>{
         if(userId){
             setLoading(true)
-            fetch('http://localhost:8000/content/'+id+'/'+userId)
+            fetch(process.env.REACT_APP_API_URL+'/content/'+id+'/'+userId)
             .then(res=>{
                 res.json().then(con=>{
                     setLoading(false)
@@ -25,7 +25,7 @@ function BlogContent() {
             })
     } else{
     setLoading(true)
-    fetch('http://localhost:8000/content/'+id)
+    fetch(process.env.REACT_APP_API_URL+'/content/'+id)
     .then(res=>{
         res.json().then(con=>{
             setLoading(false)
@@ -38,7 +38,7 @@ function BlogContent() {
     
   async function HandleDeleteBlog(){
     setLoadingDelete(true)
-    const res= await fetch('http://localhost:8000/deleteBlog/'+ id,{
+    const res= await fetch(process.env.REACT_APP_API_URL+'/deleteBlog/'+ id,{
       method:'DELETE',
       headers:{'Content-Type':'application/json'}
   })

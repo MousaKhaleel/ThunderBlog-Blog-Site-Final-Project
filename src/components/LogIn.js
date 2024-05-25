@@ -15,7 +15,7 @@ function LogIn() {
     setLoading(true);
   
     try {
-      const res = await fetch('http://localhost:8000/login', {
+      const res = await fetch(process.env.REACT_APP_API_URL+'/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },

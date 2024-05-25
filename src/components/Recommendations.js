@@ -14,7 +14,7 @@ function Recommendations() {
 
   useEffect(() => {
     if (userId) {
-      fetch('http://localhost:8000/history/' + userId, {
+      fetch(process.env.REACT_APP_API_URL+'/history/' + userId, {
         credentials: 'include'
       })
       .then(res => res.json())
@@ -31,7 +31,7 @@ function Recommendations() {
       for (let i = 0; i < history.length; i++) {
         try {
           const res = await fetch(
-            "http://localhost:8000/historyblogs/" + history[i],
+            process.env.REACT_APP_API_URL+"/historyblogs/" + history[i],
             { credentials: "include" }
           );
           const blog = await res.json();
@@ -77,7 +77,7 @@ console.log(topTags)
     const fetchRecommendedBlogs = async () => {
       try {
         const res = await fetch(
-          "http://localhost:8000/recommendedblogs/",
+          process.env.REACT_APP_API_URL+"/recommendedblogs/",
           {
             method: "POST",
             headers: {
