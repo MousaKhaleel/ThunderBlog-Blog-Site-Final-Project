@@ -9,6 +9,11 @@ export const ThemeProvider = ({ children }) => {
     // const [darkTheme]=useState({bg: "rgb(18, 18, 18)", txt: 'white'})
     // ...darkTheme,
 
+    useEffect(()=>{
+      if(localStorage.getItem("theme")===null)
+    localStorage.setItem('theme', 'light');
+    },[])
+
     function toggleTheme(){
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     window.location.reload();
