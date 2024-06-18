@@ -24,7 +24,6 @@ function NavBar() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('box');
-    if(savedTheme)
     setIsChecked(savedTheme === 'dark');
   }, []);
 
