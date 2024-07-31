@@ -3,15 +3,12 @@ import './mainStyle.css'
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { data } from 'jquery';
 
 function LogIn() {
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
   const [loading, setLoading]=useState(false);
   const [redirect, setRedirect]=useState(false);
-
-  const {setUserId, setUserName, setUserEmail, setUserPassword}=useContext(UserContext);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -26,11 +23,7 @@ function LogIn() {
       });
   
       if (res.ok) {
-        const data = await res.json().then(
-        setUserId(data.id),
-        setUserName(data.name),
-        setUserEmail(data.email),
-        setUserPassword(data.password));
+        const data = await res.json();
         setLoading(false);
         setRedirect(true);
       } else {
