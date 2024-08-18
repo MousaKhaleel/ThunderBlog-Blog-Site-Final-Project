@@ -6,8 +6,8 @@ function BlogList({blogs}) {
   
   return (
 <div>
-  {blogs?.map((item, i) => (
-    <Blog key={i} Title={item.Title??'no data found'} Preview={item.Preview??'no data found'} id={item._id?? i} />
+  {blogs.map((item, i) => (
+    <Blog key={i} Title={item.Title} Preview={item.Preview} id={item._id} />
   ))}
 </div>
   );

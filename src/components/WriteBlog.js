@@ -64,7 +64,6 @@ function WriteBlog() {
       id="title"
       value={title} onChange={handleTitleChange}
       placeholder="Be creative!"
-      required
     />
   </div>
   <br/>
@@ -107,7 +106,6 @@ function WriteBlog() {
       value={content} onChange={handleContentChange}
       rows={12}
       defaultValue={""}
-      required
     />
   </div>
   <br/>

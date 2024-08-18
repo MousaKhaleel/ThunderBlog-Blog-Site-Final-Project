@@ -19,7 +19,7 @@ function Recommendations() {
       })
       .then(res => res.json())
       .then(hist => {
-        setHistory(hist || []);
+        setHistory(hist);
       })
       .catch(error => console.error('Error fetching history:', error));
     }
@@ -53,7 +53,7 @@ function Recommendations() {
 useEffect(() => {
   if (historyBlogs.length > 0) {
     const allTags = historyBlogs.reduce((tags, blog) => {
-      return [...tags, ...blog.Tags || []];
+      return [...tags, ...blog.Tags];
     }, []);
 
     const tagCounts = {};
@@ -107,7 +107,7 @@ console.log(topTags)
       <main>
         {!loading && <h1>Recommended Blogs based on your history</h1>}
         {!loading && <hr/>}
-        {topTags.length>0 || !loading && <h3 style={{minHeight:'30vh'}}>View some Blogs to get Recommendations</h3>}
+        {historyBlogs.length>0 || !loading && <h3 style={{minHeight:'60vh'}}>View some Blogs to get Recommendations</h3>}
         {recommendedBlogs && <BlogList blogs={recommendedBlogs} />}
         {loading && <h2 className="hl">Loading...</h2>}
       </main>
