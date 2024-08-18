@@ -57,3 +57,50 @@ describe("Login Endpoint", () => {
     expect(response.body).toEqual("Wrong info try again");
   });
 });
+
+// describe("Register Endpoint", () => {
+//   it("should register a new user", async () => {
+//     const userData = { name: "TestUser", email: "test@example.com", password: "password" };
+
+//     const response = await request(app)
+//       .post("/register")
+//       .send(userData)
+//       .expect("Content-Type", /text/)
+//       .expect(200);
+
+//     expect(response.text).toEqual("Registration successful");
+//   });
+
+//   it("should return 400 for existing user", async () => {
+//     const existingUser = { name: "ExistingUser", email: "existing@example.com", password: "password" };
+
+//     await userCollection.insertOne(existingUser);
+
+//     const response = await request(app)
+//       .post("/register")
+//       .send(existingUser)
+//       .expect("Content-Type", /text/)
+//       .expect(400);
+
+//     expect(response.text).toEqual("User already exists");
+//   });
+// });
+
+describe("Profile Endpoint", () => {
+  it("should return user profile when authorized", async () => {
+    
+    const userData = { name: "TestUser", email: "test@example.com", password: "password" };
+
+    const token = jwt.sign(userData, secret);
+
+    const response = await request(app)
+      .get("/profile")
+      .set("Cookie", `token=${token}`)
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(response.body.name).toEqual(userData.name);
+    expect(response.body.email).toEqual(userData.email);
+    
+  });
+});
