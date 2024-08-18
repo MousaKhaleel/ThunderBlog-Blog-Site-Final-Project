@@ -28,3 +28,32 @@ describe('GET /allblogs', () => {
     expect(response.body).toBeDefined();
   });
 });
+
+describe("Login Endpoint", () => {
+  it("should log in user with valid credentials", async () => {
+    
+    const userData = { email: "test@example.com", password: "password" };
+
+    await userCollection.insertOne(userData);
+
+   
+    const response = await request(app)
+      .post("/login")
+      .send(userData)
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(response.body).toHaveProperty("token");
+  });
+
+  it("should return 400 for invalid credentials", async () => {
+    
+    const response = await request(app)
+      .post("/login")
+      .send({ email: "invalid@example.com", password: "invalid" })
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(response.body).toEqual("Wrong info try again");
+  });
+});
