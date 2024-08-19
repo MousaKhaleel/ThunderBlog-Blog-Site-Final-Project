@@ -104,3 +104,73 @@ describe("Profile Endpoint", () => {
     
   });
 });
+
+describe("Logout Endpoint", () => {
+  it("should clear the token cookie and respond with 'ok'", async () => {
+  
+  
+    const response = await request(app)
+      .post("/logout")
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(response.body).toEqual("ok");
+
+    expect(response.headers["set-cookie"]).toContain("token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+  });
+});
+
+describe('Add Blog Endpoint', () => {
+  
+  it('should add a new blog successfully', async () => {
+
+    const newBlogData = {
+      title: 'Test Blog',
+      preview: 'This is a test blog preview',
+      content: 'This is the content of the test blog',
+      userId: 'user123',
+      tags: ['music', 'health']
+    };
+
+    const response = await request(app)
+      .post('/addblog')
+      .send(newBlogData)
+      .expect(200);
+
+    expect(response.text).toBe('Added successfully');
+  });
+
+  it('should return 400 if required fields are missing', async () => {
+
+    const invalidBlogData = {
+      preview: 'This is a test blog preview',
+      content: 'This is the content of the test blog',
+      userId: 'user123',
+      tags: ['music', 'health']
+    };
+
+    await request(app)
+      .post('/addblog')
+      .send(invalidBlogData)
+      .expect(400);
+  });
+
+  it('should return 500 Internal Server Error if database operation fails', async () => {
+    
+    const newBlogData = {
+      title: 'Test Blog',
+      preview: 'This is a test blog preview',
+      content: 'This is the content of the test blog',
+      userId: 'user123',
+      tags: ['music', 'health']
+    };
+
+    
+    blogCollection.insertOne = jest.fn().mockRejectedValue(new Error('Database error'));
+
+    await request(app)
+      .post('/addblog')
+      .send(newBlogData)
+      .expect(500);
+  });
+});
