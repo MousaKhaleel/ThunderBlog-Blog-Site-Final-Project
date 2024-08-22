@@ -1,0 +1,59 @@
+const request = require('supertest');
+const { app, userCollection, blogCollection } = require('../../server.js');
+let server;
+
+beforeAll(async () => {
+  server = await app.listen();
+});
+
+describe('Integration Tests', () => {
+  describe('User Registration and Login Flow', () => {
+    it('should register a new user and login successfully', async () => { 
+      const newUser = { name: 'TestUser', email: 'test111114@example.com', password: 'password' };
+
+      const registrationResponse = await request(app)
+        .post('/register')
+        .send(newUser)
+        .expect(200);
+
+      expect(registrationResponse.text).toEqual('Registration successful');
+
+      const loginResponse = await request(app)
+        .post('/login')
+        .send({ email: 'test2@example.com', password: 'password' })
+        .expect(200);
+
+      expect(loginResponse.body.token).toBeTruthy();
+    });
+  });
+
+  describe('Blog Management', () => {
+    it('should add a new blog', async () => {
+      const newBlogData = {
+        title: 'Integration Test Blog',
+        preview: 'Test Preview',
+        content: 'Test Content',
+        userId: '65e35a887505aabde52fb3ef',
+        tags: ['music', 'health'],
+      };
+
+      const initialBlogs = await blogCollection.find({}).toArray();
+      const initialBlogLen = initialBlogs.length;
+
+      const response = await request(app)
+        .post('/addblog')
+        .send(newBlogData)
+        .expect(200);
+
+      expect(response.text).toBe('Added successfully');
+
+      const blogs = await blogCollection.find({}).toArray();
+      const blogLen = blogs.length;
+      expect(blogLen).toBe(initialBlogLen + 1);
+    });
+  });
+
+  afterEach(async () => {
+    await server.close();
+  });
+});

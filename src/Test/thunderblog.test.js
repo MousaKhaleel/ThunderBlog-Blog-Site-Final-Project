@@ -32,7 +32,7 @@ describe('GET /allblogs', () => {
 describe("Login Endpoint", () => {
   it("should log in user with valid credentials", async () => {
     
-    const userData = { email: "test@example.com", password: "password" };
+    const userData = { email: "test111114@example.com", password: "password" };
 
     await userCollection.insertOne(userData);
 
