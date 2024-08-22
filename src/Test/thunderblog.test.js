@@ -58,33 +58,33 @@ describe("Login Endpoint", () => {
   });
 });
 
-// describe("Register Endpoint", () => {
-//   it("should register a new user", async () => {
-//     const userData = { name: "TestUser", email: "test@example.com", password: "password" };
+describe("Register Endpoint", () => {
+  it("should register a new user", async () => {
+    const userData = { name: "TestUser", email: "test555553@example.com", password: "password" };
 
-//     const response = await request(app)
-//       .post("/register")
-//       .send(userData)
-//       .expect("Content-Type", /text/)
-//       .expect(200);
+    const response = await request(app)
+      .post("/register")
+      .send(userData)
+      .expect("Content-Type", /text/)
+      .expect(200);
 
-//     expect(response.text).toEqual("Registration successful");
-//   });
+    expect(response.text).toEqual("Registration successful");
+  });
 
-//   it("should return 400 for existing user", async () => {
-//     const existingUser = { name: "ExistingUser", email: "existing@example.com", password: "password" };
+  it("should return 400 for existing user", async () => {
+    const existingUser = { name: "TestUser", email: "test111112@example.com", password: "password" };
 
-//     await userCollection.insertOne(existingUser);
+    await userCollection.insertOne(existingUser);
 
-//     const response = await request(app)
-//       .post("/register")
-//       .send(existingUser)
-//       .expect("Content-Type", /text/)
-//       .expect(400);
+    const response = await request(app)
+      .post("/register")
+      .send(existingUser)
+      .expect("Content-Type", /text/)
+      .expect(400);
 
-//     expect(response.text).toEqual("User already exists");
-//   });
-// });
+    expect(response.text).toEqual("User already exists");
+  });
+});
 
 describe("Profile Endpoint", () => {
   it("should return user profile when authorized", async () => {
